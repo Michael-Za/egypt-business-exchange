@@ -100,22 +100,22 @@ export default function Landing() {
 
       {/* Header */}
       <header className="border-b sticky top-0 bg-background/80 backdrop-blur-xl z-50 shadow-sm">
-        <div className="container mx-auto px-4 py-3 md:py-4">
+        <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <img src="/logo.svg" alt="Logo" className="h-8 w-8 md:h-10 md:w-10" />
-              <span className="font-bold text-lg md:text-2xl">Business Exchange</span>
+              <img src="/logo.svg" alt="Logo" className="h-10 w-10" />
+              <span className="font-bold text-2xl">Business Exchange</span>
             </div>
-            <div className="flex items-center gap-2 md:gap-4">
-              <Button variant="ghost" onClick={() => navigate("/browse")} className="text-sm md:text-base px-2 md:px-4">
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" onClick={() => navigate("/browse")} className="text-base">
                 Browse
               </Button>
               {isAuthenticated ? (
-                <Button onClick={() => navigate("/list-business")} size="sm" className="text-xs md:text-base md:size-lg shadow-lg shadow-primary/20 hidden sm:inline-flex">
+                <Button onClick={() => navigate("/list-business")} size="lg" className="text-base shadow-lg shadow-primary/20">
                   List Your Business
                 </Button>
               ) : (
-                <Button onClick={() => navigate("/auth")} size="sm" className="text-xs md:text-base md:size-lg shadow-lg shadow-primary/20">Get Started</Button>
+                <Button onClick={() => navigate("/auth")} size="lg" className="text-base shadow-lg shadow-primary/20">Get Started</Button>
               )}
             </div>
           </div>
@@ -140,26 +140,26 @@ export default function Landing() {
               <Zap className="h-5 w-5" />
               <span className="text-sm font-semibold">Egypt's #1 Business Marketplace</span>
             </motion.div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight mb-4 md:mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
               Buy & Sell Businesses
               <br />
               <span className="text-primary bg-clip-text bg-gradient-to-r from-primary to-accent">With Confidence</span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed px-4">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
               Discover profitable opportunities across Egypt. Connect with verified sellers, access transparent financials, and grow your entrepreneurial portfolio.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-8 md:mb-12 px-4">
-              <Button size="lg" onClick={() => navigate("/browse")} className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6 h-auto shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all hover:scale-105">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Button size="lg" onClick={() => navigate("/browse")} className="text-lg px-8 py-6 h-auto shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all hover:scale-105">
                 Explore Businesses
-                <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => navigate("/list-business")} className="text-base md:text-lg px-6 md:px-8 py-5 md:py-6 h-auto border-2 shadow-lg hover:shadow-xl transition-all hover:scale-105">
+              <Button size="lg" variant="outline" onClick={() => navigate("/list-business")} className="text-lg px-8 py-6 h-auto border-2 shadow-lg hover:shadow-xl transition-all hover:scale-105">
                 Sell Your Business
               </Button>
             </div>
 
             {/* Stats Bar */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 max-w-4xl mx-auto mt-8 md:mt-16 px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-16">
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
@@ -167,10 +167,10 @@ export default function Landing() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 + index * 0.1 }}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="text-center bg-card/50 backdrop-blur-sm rounded-lg md:rounded-xl p-3 md:p-4 border border-border/50 shadow-lg"
+                  className="text-center bg-card/50 backdrop-blur-sm rounded-xl p-4 border border-border/50 shadow-lg"
                 >
-                  <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary mb-1">{stat.value}</div>
-                  <div className="text-xs md:text-sm text-muted-foreground font-medium">{stat.label}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -195,7 +195,7 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
             {categories.map((category, index) => (
               <motion.div
                 key={index}
@@ -212,8 +212,17 @@ export default function Landing() {
                   <CardContent className="pt-6 pb-6 text-center relative z-10">
                     <motion.div 
                       className="text-4xl mb-3 filter drop-shadow-lg"
+                      animate={{ 
+                        y: [0, -5, 0],
+                        rotate: [0, 2, 0, -2, 0]
+                      }}
+                      transition={{ 
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.2
+                      }}
                       whileHover={{ scale: 1.2, rotate: 5 }}
-                      transition={{ type: "spring", stiffness: 300 }}
                     >
                       {category.icon}
                     </motion.div>
@@ -244,7 +253,7 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -259,8 +268,17 @@ export default function Landing() {
                   <CardContent className="pt-8 pb-8 relative z-10">
                     <motion.div 
                       className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6 mx-auto shadow-xl shadow-primary/20 relative"
+                      animate={{ 
+                        scale: [1, 1.05, 1],
+                        rotate: [0, 3, 0, -3, 0]
+                      }}
+                      transition={{ 
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.3
+                      }}
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ type: "spring", stiffness: 300 }}
                     >
                       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 to-transparent blur-md"></div>
                       <feature.icon className="h-8 w-8 text-primary relative z-10 drop-shadow-lg" />
@@ -292,7 +310,7 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {[
               { number: "01", title: "Browse Listings", description: "Explore hundreds of verified businesses across various industries and locations" },
               { number: "02", title: "Review Details", description: "Analyze comprehensive financials, operations data, and growth potential metrics" },
@@ -351,27 +369,27 @@ export default function Landing() {
             viewport={{ once: true }}
             className="text-center max-w-4xl mx-auto"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 md:mb-6">
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
               Ready to Get Started?
             </h2>
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 md:mb-10 opacity-95 leading-relaxed px-4">
+            <p className="text-xl md:text-2xl mb-10 opacity-95 leading-relaxed">
               Join thousands of entrepreneurs buying and selling businesses across Egypt. Your next opportunity awaits.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center px-4">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button
                 size="lg"
                 variant="secondary"
                 onClick={() => navigate("/browse")}
-                className="text-base md:text-lg px-6 md:px-10 py-5 md:py-7 h-auto shadow-2xl hover:shadow-xl transition-all hover:scale-105"
+                className="text-lg px-10 py-7 h-auto shadow-2xl hover:shadow-xl transition-all hover:scale-105"
               >
                 Explore Businesses
-                <ArrowRight className="ml-2 h-5 w-5 md:h-6 md:w-6" />
+                <ArrowRight className="ml-2 h-6 w-6" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 onClick={() => navigate(isAuthenticated ? "/list-business" : "/auth")}
-                className="text-base md:text-lg px-6 md:px-10 py-5 md:py-7 h-auto bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all hover:scale-105"
+                className="text-lg px-10 py-7 h-auto bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all hover:scale-105"
               >
                 List Your Business
               </Button>
