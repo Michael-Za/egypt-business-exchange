@@ -525,7 +525,18 @@ export default function Landing() {
             <p className="text-xl md:text-2xl mb-10 opacity-95 leading-relaxed">
               Join thousands of entrepreneurs buying and selling businesses across Egypt. Your next opportunity awaits.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-6 justify-center"
+              animate={{
+                y: [0, -15, 0],
+                rotateX: [0, 2, 0, -2, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
               <Button
                 size="lg"
                 variant="secondary"
@@ -543,7 +554,7 @@ export default function Landing() {
               >
                 List Your Business
               </Button>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
