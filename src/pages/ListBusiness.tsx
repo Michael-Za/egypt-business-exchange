@@ -101,7 +101,7 @@ export default function ListBusiness() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
               <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
-              <span className="font-bold text-xl">BizEgypt</span>
+              <span className="font-bold text-xl">Business Exchange</span>
             </div>
             <Button variant="outline" onClick={() => navigate("/browse")}>
               Cancel

@@ -58,7 +58,7 @@ export default function Landing() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
-              <span className="font-bold text-xl">BizEgypt</span>
+              <span className="font-bold text-xl">Business Exchange</span>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="ghost" onClick={() => navigate("/browse")}>
@@ -87,7 +87,7 @@ export default function Landing() {
           >
             <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
               <Building2 className="h-4 w-4" />
-              <span className="text-sm font-medium">Egypt's Premier Business Marketplace</span>
+              <span className="text-sm font-medium">Egypt's Premier Business Exchange</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
               Buy & Sell Businesses
@@ -95,7 +95,7 @@ export default function Landing() {
               <span className="text-primary">Across Egypt</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Connect with verified business owners, explore profitable opportunities, and grow your entrepreneurial portfolio in Egypt's thriving market.
+              Connect with verified business owners, explore profitable opportunities, and grow your entrepreneurial portfolio through Egypt's premier business exchange platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" onClick={() => navigate("/browse")} className="text-lg">
@@ -120,7 +120,7 @@ export default function Landing() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              Why Choose BizEgypt?
+              Why Choose Business Exchange?
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               The most trusted platform for business transactions in Egypt
@@ -231,10 +231,10 @@ export default function Landing() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <img src="/logo.svg" alt="Logo" className="h-6 w-6" />
-              <span className="font-bold">BizEgypt</span>
+              <span className="font-bold">Business Exchange</span>
             </div>
             <p className="text-sm text-muted-foreground">
-              © 2024 BizEgypt. All rights reserved.
+              © 2024 Business Exchange. All rights reserved.
             </p>
           </div>
         </div>
