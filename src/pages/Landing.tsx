@@ -1,13 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/hooks/use-auth";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Building2, CheckCircle, Search, TrendingUp, Users, Shield, Clock, Award, Zap } from "lucide-react";
 import { useNavigate } from "react-router";
+import { useRef } from "react";
 
 export default function Landing() {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   const features = [
     {
@@ -49,9 +59,12 @@ export default function Landing() {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div ref={containerRef} className="min-h-screen relative overflow-hidden">
       {/* Animated Background Pattern */}
-      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <motion.div 
+        style={{ y: backgroundY }}
+        className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
+      >
         <div className="absolute top-0 -left-4 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
         <div className="absolute top-0 -right-4 w-72 h-72 bg-accent/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
         <div className="absolute -bottom-8 left-20 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
@@ -96,7 +109,7 @@ export default function Landing() {
             ease: "easeInOut",
           }}
         />
-      </div>
+      </motion.div>
 
       {/* Header */}
       <header className="border-b sticky top-0 bg-background/80 backdrop-blur-xl z-50 shadow-sm">
@@ -124,7 +137,10 @@ export default function Landing() {
 
       {/* Hero Section - Enhanced */}
       <section className="relative py-16 md:py-24 overflow-hidden">
-        <div className="container mx-auto px-4 relative z-10">
+        <motion.div 
+          style={{ y: heroY, opacity: heroOpacity }}
+          className="container mx-auto px-4 relative z-10"
+        >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -175,7 +191,7 @@ export default function Landing() {
               ))}
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Categories Section - Enhanced with 3D effect */}
