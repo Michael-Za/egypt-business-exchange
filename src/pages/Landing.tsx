@@ -487,11 +487,26 @@ export default function Landing() {
       {/* CTA Section - Enhanced */}
       <section className="py-24 bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+        
+        {/* Space-themed element with stars */}
         <motion.div
-          className="absolute top-10 right-10 w-32 h-32 border-2 border-primary-foreground/10 rounded-full"
+          className="absolute top-10 right-10 w-32 h-32 rounded-full bg-black/80 backdrop-blur-sm overflow-hidden"
           animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
           transition={{ duration: 20, repeat: Infinity }}
-        />
+        >
+          {/* Stars */}
+          <div className="absolute top-4 left-6 w-1 h-1 bg-white rounded-full animate-pulse"></div>
+          <div className="absolute top-8 right-8 w-0.5 h-0.5 bg-white rounded-full"></div>
+          <div className="absolute bottom-6 left-10 w-1.5 h-1.5 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+          <div className="absolute top-12 left-16 w-0.5 h-0.5 bg-white rounded-full"></div>
+          <div className="absolute bottom-10 right-6 w-1 h-1 bg-white rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-16 right-12 w-0.5 h-0.5 bg-white rounded-full"></div>
+          <div className="absolute bottom-14 left-8 w-1 h-1 bg-white rounded-full"></div>
+          <div className="absolute top-6 right-14 w-0.5 h-0.5 bg-white rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+          <div className="absolute bottom-8 right-10 w-0.5 h-0.5 bg-white rounded-full"></div>
+          <div className="absolute top-14 left-12 w-1 h-1 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.8s' }}></div>
+        </motion.div>
+        
         <motion.div
           className="absolute bottom-10 left-10 w-24 h-24 border-2 border-primary-foreground/10 rounded-lg"
           animate={{ rotate: [0, 90, 0], y: [0, -20, 0] }}
