@@ -123,12 +123,10 @@ export default function Landing() {
               <Button variant="ghost" onClick={() => navigate("/browse")} className="text-base">
                 Browse
               </Button>
-              {isAuthenticated ? (
+              {isAuthenticated && (
                 <Button onClick={() => navigate("/list-business")} size="lg" className="text-base shadow-lg shadow-primary/20">
                   List Your Business
                 </Button>
-              ) : (
-                <Button onClick={() => navigate("/auth")} size="lg" className="text-base shadow-lg shadow-primary/20">Get Started</Button>
               )}
             </div>
           </div>
