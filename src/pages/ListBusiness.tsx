@@ -39,7 +39,7 @@ export default function ListBusiness() {
   // Auto-authenticate as guest if not authenticated
   useEffect(() => {
     const autoSignIn = async () => {
-      if (!isLoading && !isAuthenticated && !autoAuthenticating) {
+      if (!isLoading && !isAuthenticated) {
         setAutoAuthenticating(true);
         try {
           await signIn("anonymous");
@@ -53,7 +53,7 @@ export default function ListBusiness() {
     };
     
     autoSignIn();
-  }, [isLoading, isAuthenticated, signIn, autoAuthenticating]);
+  }, [isLoading, isAuthenticated, signIn]);
 
   if (isLoading || autoAuthenticating) {
     return (
