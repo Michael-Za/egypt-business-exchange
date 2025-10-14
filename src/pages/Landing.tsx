@@ -226,22 +226,67 @@ export default function Landing() {
                 <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/50 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <CardContent className="pt-6 pb-6 text-center relative z-10">
-                    <motion.div 
-                      className="text-4xl mb-3 filter drop-shadow-lg"
-                      animate={{ 
-                        y: [0, -5, 0],
-                        rotate: [0, 2, 0, -2, 0]
-                      }}
-                      transition={{ 
-                        duration: 4,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.2
-                      }}
-                      whileHover={{ scale: 1.2, rotate: 5 }}
-                    >
-                      {category.icon}
-                    </motion.div>
+                    <div className="relative perspective-1000">
+                      <motion.div 
+                        className="text-4xl mb-3 relative z-10"
+                        style={{ transformStyle: "preserve-3d" }}
+                        animate={{ 
+                          y: [0, -8, 0],
+                          rotateX: [0, 10, 0, -10, 0],
+                          rotateY: [0, 10, 0, -10, 0],
+                          rotateZ: [0, 5, 0, -5, 0],
+                          scale: [1, 1.05, 1, 1.05, 1]
+                        }}
+                        transition={{ 
+                          duration: 6,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.3
+                        }}
+                        whileHover={{ 
+                          scale: 1.3, 
+                          rotateY: 180,
+                          rotateX: 20,
+                          transition: { duration: 0.6 }
+                        }}
+                      >
+                        {category.icon}
+                      </motion.div>
+                      {/* Layer 1 - Shadow dimension */}
+                      <motion.div 
+                        className="absolute inset-0 text-4xl blur-md opacity-40"
+                        style={{ transform: "translateZ(-20px)" }}
+                        animate={{ 
+                          scale: [1.1, 1.2, 1.1],
+                          opacity: [0.3, 0.5, 0.3]
+                        }}
+                        transition={{ 
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.3 + 0.5
+                        }}
+                      >
+                        {category.icon}
+                      </motion.div>
+                      {/* Layer 2 - Glow dimension */}
+                      <motion.div 
+                        className="absolute inset-0 text-4xl blur-xl opacity-20"
+                        style={{ transform: "translateZ(-40px)" }}
+                        animate={{ 
+                          scale: [1.2, 1.4, 1.2],
+                          opacity: [0.2, 0.4, 0.2]
+                        }}
+                        transition={{ 
+                          duration: 5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.3 + 1
+                        }}
+                      >
+                        {category.icon}
+                      </motion.div>
+                    </div>
                     <h3 className="font-bold text-sm mb-1">{category.name}</h3>
                     <p className="text-xs text-muted-foreground">{category.count} listings</p>
                   </CardContent>
@@ -282,23 +327,97 @@ export default function Landing() {
                 <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/30 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <CardContent className="pt-8 pb-8 relative z-10">
-                    <motion.div 
-                      className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6 mx-auto shadow-xl shadow-primary/20 relative"
-                      animate={{ 
-                        scale: [1, 1.05, 1],
-                        rotate: [0, 3, 0, -3, 0]
-                      }}
-                      transition={{ 
-                        duration: 5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.3
-                      }}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                    >
-                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 to-transparent blur-md"></div>
-                      <feature.icon className="h-8 w-8 text-primary relative z-10 drop-shadow-lg" />
-                    </motion.div>
+                    <div className="relative h-16 w-16 mx-auto mb-6" style={{ perspective: "1000px" }}>
+                      {/* Dimension 6 - Deepest glow */}
+                      <motion.div 
+                        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 blur-2xl"
+                        style={{ transform: "translateZ(-60px)" }}
+                        animate={{ 
+                          scale: [1.4, 1.6, 1.4],
+                          opacity: [0.3, 0.6, 0.3],
+                          rotate: [0, 180, 360]
+                        }}
+                        transition={{ 
+                          duration: 8,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.4
+                        }}
+                      />
+                      {/* Dimension 5 - Mid glow */}
+                      <motion.div 
+                        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 blur-xl"
+                        style={{ transform: "translateZ(-40px)" }}
+                        animate={{ 
+                          scale: [1.3, 1.5, 1.3],
+                          opacity: [0.4, 0.7, 0.4],
+                          rotate: [0, -90, -180]
+                        }}
+                        transition={{ 
+                          duration: 7,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.4 + 0.5
+                        }}
+                      />
+                      {/* Dimension 4 - Near shadow */}
+                      <motion.div 
+                        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 to-accent/30 blur-lg"
+                        style={{ transform: "translateZ(-20px)" }}
+                        animate={{ 
+                          scale: [1.2, 1.3, 1.2],
+                          opacity: [0.5, 0.8, 0.5],
+                          rotateX: [0, 20, 0],
+                          rotateY: [0, 20, 0]
+                        }}
+                        transition={{ 
+                          duration: 6,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.4 + 1
+                        }}
+                      />
+                      {/* Dimension 3 - Container */}
+                      <motion.div 
+                        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 shadow-xl shadow-primary/20"
+                        style={{ transformStyle: "preserve-3d" }}
+                        animate={{ 
+                          scale: [1, 1.05, 1],
+                          rotateX: [0, 5, 0, -5, 0],
+                          rotateY: [0, 5, 0, -5, 0],
+                          rotateZ: [0, 3, 0, -3, 0]
+                        }}
+                        transition={{ 
+                          duration: 5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.3
+                        }}
+                        whileHover={{ 
+                          scale: 1.15,
+                          rotateY: 180,
+                          rotateX: 20,
+                          transition: { duration: 0.8 }
+                        }}
+                      >
+                        {/* Dimension 2 - Inner glow */}
+                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 to-transparent blur-md"></div>
+                        {/* Dimension 1 - Icon */}
+                        <motion.div
+                          className="absolute inset-0 flex items-center justify-center"
+                          animate={{
+                            rotateZ: [0, 360]
+                          }}
+                          transition={{
+                            duration: 20,
+                            repeat: Infinity,
+                            ease: "linear"
+                          }}
+                        >
+                          <feature.icon className="h-8 w-8 text-primary relative z-10 drop-shadow-2xl" />
+                        </motion.div>
+                      </motion.div>
+                    </div>
                     <h3 className="text-xl font-bold mb-3 text-center">{feature.title}</h3>
                     <p className="text-muted-foreground text-center leading-relaxed">{feature.description}</p>
                   </CardContent>

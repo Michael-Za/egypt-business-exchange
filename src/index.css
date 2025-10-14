@@ -152,3 +152,12 @@
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+/* Perspective utilities for multi-dimensional effects */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
