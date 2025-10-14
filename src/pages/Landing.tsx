@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/hooks/use-auth";
 import { motion } from "framer-motion";
-import { ArrowRight, Building2, CheckCircle, Search, TrendingUp, Users } from "lucide-react";
+import { ArrowRight, Building2, CheckCircle, Search, TrendingUp, Users, Shield, Clock, Award, Zap } from "lucide-react";
 import { useNavigate } from "react-router";
 
 export default function Landing() {
@@ -11,107 +11,122 @@ export default function Landing() {
 
   const features = [
     {
-      icon: Search,
-      title: "Easy Discovery",
-      description: "Browse through hundreds of verified businesses across Egypt",
+      icon: Shield,
+      title: "Verified Listings",
+      description: "All businesses are verified with transparent financial records and documentation",
     },
     {
       icon: TrendingUp,
-      title: "Transparent Financials",
-      description: "Access detailed revenue, profit, and growth metrics",
+      title: "Real Financial Data",
+      description: "Access actual revenue, profit margins, and growth metrics for informed decisions",
     },
     {
-      icon: Users,
-      title: "Direct Contact",
-      description: "Connect directly with business owners and negotiate deals",
+      icon: Clock,
+      title: "Quick Transactions",
+      description: "Connect directly with sellers and close deals faster with our streamlined process",
+    },
+    {
+      icon: Award,
+      title: "Trusted Platform",
+      description: "Egypt's most trusted marketplace for buying and selling established businesses",
     },
   ];
 
-  const steps = [
-    {
-      number: "01",
-      title: "Browse Listings",
-      description: "Explore businesses for sale across various industries",
-    },
-    {
-      number: "02",
-      title: "Review Details",
-      description: "Analyze financials, operations, and growth potential",
-    },
-    {
-      number: "03",
-      title: "Contact Seller",
-      description: "Reach out to owners and schedule meetings",
-    },
-    {
-      number: "04",
-      title: "Close the Deal",
-      description: "Negotiate terms and complete the acquisition",
-    },
+  const categories = [
+    { name: "Restaurants & Cafes", count: "50+", icon: "🍽️" },
+    { name: "Retail & Shops", count: "40+", icon: "🛍️" },
+    { name: "Technology", count: "30+", icon: "💻" },
+    { name: "Healthcare", count: "25+", icon: "🏥" },
+    { name: "Education", count: "20+", icon: "📚" },
+    { name: "Services", count: "60+", icon: "⚙️" },
+  ];
+
+  const stats = [
+    { value: "500+", label: "Active Listings" },
+    { value: "1000+", label: "Successful Deals" },
+    { value: "50M+", label: "EGP Transacted" },
+    { value: "95%", label: "Satisfaction Rate" },
   ];
 
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50">
+      <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
-              <span className="font-bold text-xl">Business Exchange</span>
+              <img src="/logo.svg" alt="Logo" className="h-10 w-10" />
+              <span className="font-bold text-2xl">Business Exchange</span>
             </div>
             <div className="flex items-center gap-4">
-              <Button variant="ghost" onClick={() => navigate("/browse")}>
+              <Button variant="ghost" onClick={() => navigate("/browse")} className="text-base">
                 Browse
               </Button>
               {isAuthenticated ? (
-                <Button onClick={() => navigate("/list-business")}>
+                <Button onClick={() => navigate("/list-business")} size="lg" className="text-base">
                   List Your Business
                 </Button>
               ) : (
-                <Button onClick={() => navigate("/auth")}>Get Started</Button>
+                <Button onClick={() => navigate("/auth")} size="lg" className="text-base">Get Started</Button>
               )}
             </div>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-20 md:py-32">
-        <div className="container mx-auto px-4">
+      {/* Hero Section - Enhanced */}
+      <section className="relative py-16 md:py-24 bg-gradient-to-br from-primary/5 via-background to-accent/5 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-4xl mx-auto"
+            transition={{ duration: 0.7 }}
+            className="text-center max-w-5xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
-              <Building2 className="h-4 w-4" />
-              <span className="text-sm font-medium">Egypt's Premier Business Exchange</span>
+            <div className="inline-flex items-center gap-2 bg-primary/15 text-primary px-6 py-3 rounded-full mb-8 border border-primary/20">
+              <Zap className="h-5 w-5" />
+              <span className="text-sm font-semibold">Egypt's #1 Business Marketplace</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
               Buy & Sell Businesses
               <br />
-              <span className="text-primary">Across Egypt</span>
+              <span className="text-primary bg-clip-text">With Confidence</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Connect with verified business owners, explore profitable opportunities, and grow your entrepreneurial portfolio through Egypt's premier business exchange platform.
+            <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
+              Discover profitable opportunities across Egypt. Connect with verified sellers, access transparent financials, and grow your entrepreneurial portfolio.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" onClick={() => navigate("/browse")} className="text-lg">
-                Browse Businesses
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Button size="lg" onClick={() => navigate("/browse")} className="text-lg px-8 py-6 h-auto shadow-lg hover:shadow-xl transition-all">
+                Explore Businesses
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => navigate("/list-business")} className="text-lg">
-                List Your Business
+              <Button size="lg" variant="outline" onClick={() => navigate("/list-business")} className="text-lg px-8 py-6 h-auto border-2">
+                Sell Your Business
               </Button>
+            </div>
+
+            {/* Stats Bar */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-16">
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + index * 0.1 }}
+                  className="text-center"
+                >
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-muted/50">
+      {/* Categories Section - New */}
+      <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -119,30 +134,31 @@ export default function Landing() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              Why Choose Business Exchange?
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+              Browse by Category
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              The most trusted platform for business transactions in Egypt
+              Find the perfect business opportunity in your industry
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {features.map((feature, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto">
+            {categories.map((category, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ scale: 1.05 }}
+                className="cursor-pointer"
+                onClick={() => navigate("/browse")}
               >
-                <Card className="h-full">
-                  <CardContent className="pt-6">
-                    <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                      <feature.icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                    <p className="text-muted-foreground">{feature.description}</p>
+                <Card className="h-full hover:shadow-lg transition-all border-2 hover:border-primary/50">
+                  <CardContent className="pt-6 pb-6 text-center">
+                    <div className="text-4xl mb-3">{category.icon}</div>
+                    <h3 className="font-bold text-sm mb-1">{category.name}</h3>
+                    <p className="text-xs text-muted-foreground">{category.count} listings</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -151,72 +167,128 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-20">
+      {/* Features Section - Enhanced */}
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-              How It Works
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+              Why Choose Business Exchange?
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Four simple steps to find your next business opportunity
+              The most trusted and efficient platform for business transactions in Egypt
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            {steps.map((step, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {features.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center"
               >
-                <div className="text-5xl font-bold text-primary/20 mb-4">{step.number}</div>
-                <h3 className="text-xl font-bold mb-2">{step.title}</h3>
-                <p className="text-muted-foreground">{step.description}</p>
+                <Card className="h-full hover:shadow-xl transition-all border-2 hover:border-primary/30">
+                  <CardContent className="pt-8 pb-8">
+                    <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 mx-auto">
+                      <feature.icon className="h-7 w-7 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-center">{feature.title}</h3>
+                    <p className="text-muted-foreground text-center leading-relaxed">{feature.description}</p>
+                  </CardContent>
+                </Card>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      {/* How It Works - Enhanced */}
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
+            className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+              How It Works
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Four simple steps to your next business opportunity
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            {[
+              { number: "01", title: "Browse Listings", description: "Explore hundreds of verified businesses across various industries and locations" },
+              { number: "02", title: "Review Details", description: "Analyze comprehensive financials, operations data, and growth potential metrics" },
+              { number: "03", title: "Contact Seller", description: "Connect directly with business owners and schedule meetings to discuss details" },
+              { number: "04", title: "Close the Deal", description: "Negotiate terms, complete due diligence, and finalize your acquisition" },
+            ].map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="relative"
+              >
+                <Card className="h-full border-2">
+                  <CardContent className="pt-8 pb-8">
+                    <div className="text-6xl font-bold text-primary/20 mb-4 text-center">{step.number}</div>
+                    <h3 className="text-xl font-bold mb-3 text-center">{step.title}</h3>
+                    <p className="text-muted-foreground text-center leading-relaxed">{step.description}</p>
+                  </CardContent>
+                </Card>
+                {index < 3 && (
+                  <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
+                    <ArrowRight className="h-8 w-8 text-primary/30" />
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section - Enhanced */}
+      <section className="py-24 bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center max-w-4xl mx-auto"
+          >
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
               Ready to Get Started?
             </h2>
-            <p className="text-lg mb-8 opacity-90">
-              Join hundreds of entrepreneurs buying and selling businesses across Egypt
+            <p className="text-xl md:text-2xl mb-10 opacity-95 leading-relaxed">
+              Join thousands of entrepreneurs buying and selling businesses across Egypt. Your next opportunity awaits.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button
                 size="lg"
                 variant="secondary"
                 onClick={() => navigate("/browse")}
-                className="text-lg"
+                className="text-lg px-10 py-7 h-auto shadow-2xl hover:shadow-xl transition-all"
               >
                 Explore Businesses
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-6 w-6" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
                 onClick={() => navigate(isAuthenticated ? "/list-business" : "/auth")}
-                className="text-lg bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                className="text-lg px-10 py-7 h-auto bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all"
               >
                 List Your Business
               </Button>
@@ -226,12 +298,12 @@ export default function Landing() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t py-8">
+      <footer className="border-t py-12 bg-muted/20">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <img src="/logo.svg" alt="Logo" className="h-6 w-6" />
-              <span className="font-bold">Business Exchange</span>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
+              <span className="font-bold text-xl">Business Exchange</span>
             </div>
             <p className="text-sm text-muted-foreground">
               © 2024 Business Exchange. All rights reserved.
