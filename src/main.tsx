@@ -52,7 +52,6 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/browse" element={<Browse />} />
             <Route path="/business/:id" element={<BusinessDetail />} />
             <Route path="/list-business" element={<ListBusiness />} />
-            <Route path="/auth" element={<AuthPage redirectAfterAuth="/browse" />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
