@@ -8,15 +8,16 @@ import { api } from "@/convex/_generated/api";
 import { useAuth } from "@/hooks/use-auth";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation } from "convex/react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 export default function ListBusiness() {
   const navigate = useNavigate();
-  const { isLoading, isAuthenticated } = useAuth();
+  const { isLoading, isAuthenticated, signIn } = useAuth();
   const [submitting, setSubmitting] = useState(false);
+  const [autoAuthenticating, setAutoAuthenticating] = useState(false);
   const createBusiness = useMutation(api.businesses.create);
 
   const [formData, setFormData] = useState({
@@ -35,17 +36,31 @@ export default function ListBusiness() {
     contactPhone: "",
   });
 
-  if (isLoading) {
+  // Auto-authenticate as guest if not authenticated
+  useEffect(() => {
+    const autoSignIn = async () => {
+      if (!isLoading && !isAuthenticated && !autoAuthenticating) {
+        setAutoAuthenticating(true);
+        try {
+          await signIn("anonymous");
+        } catch (error) {
+          console.error("Auto guest sign-in failed:", error);
+          toast.error("Failed to initialize. Please try again.");
+        } finally {
+          setAutoAuthenticating(false);
+        }
+      }
+    };
+    
+    autoSignIn();
+  }, [isLoading, isAuthenticated, signIn, autoAuthenticating]);
+
+  if (isLoading || autoAuthenticating) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin" />
       </div>
     );
-  }
-
-  if (!isAuthenticated) {
-    navigate("/auth");
-    return null;
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
