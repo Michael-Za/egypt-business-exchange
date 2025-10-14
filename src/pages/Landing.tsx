@@ -297,8 +297,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Features Section - Enhanced with 3D Icons */}
-      <section className="py-20 bg-background relative">
+      {/* Features Section - Enhanced with 6D Icons */}
+      <section className="py-20 bg-gradient-to-b from-background to-muted/20 relative">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -314,7 +314,7 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -324,17 +324,17 @@ export default function Landing() {
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
               >
-                <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/30 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <CardContent className="pt-8 pb-8 relative z-10">
-                    <div className="relative h-16 w-16 mx-auto mb-6" style={{ perspective: "1000px" }}>
-                      {/* Dimension 6 - Deepest glow */}
+                <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/50 bg-gradient-to-br from-card via-card to-primary/5 backdrop-blur-sm relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <CardContent className="pt-10 pb-10 relative z-10">
+                    <div className="relative h-20 w-20 mx-auto mb-8" style={{ perspective: "1200px" }}>
+                      {/* Dimension 6 - Deepest glow - BRIGHTER */}
                       <motion.div 
-                        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 blur-2xl"
-                        style={{ transform: "translateZ(-60px)" }}
+                        className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/30 to-accent/30 blur-3xl"
+                        style={{ transform: "translateZ(-80px)" }}
                         animate={{ 
-                          scale: [1.4, 1.6, 1.4],
-                          opacity: [0.3, 0.6, 0.3],
+                          scale: [1.5, 1.8, 1.5],
+                          opacity: [0.5, 0.9, 0.5],
                           rotate: [0, 180, 360]
                         }}
                         transition={{ 
@@ -344,13 +344,13 @@ export default function Landing() {
                           delay: index * 0.4
                         }}
                       />
-                      {/* Dimension 5 - Mid glow */}
+                      {/* Dimension 5 - Mid glow - BRIGHTER */}
                       <motion.div 
-                        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 blur-xl"
-                        style={{ transform: "translateZ(-40px)" }}
+                        className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/40 to-accent/40 blur-2xl"
+                        style={{ transform: "translateZ(-50px)" }}
                         animate={{ 
-                          scale: [1.3, 1.5, 1.3],
-                          opacity: [0.4, 0.7, 0.4],
+                          scale: [1.4, 1.6, 1.4],
+                          opacity: [0.6, 0.9, 0.6],
                           rotate: [0, -90, -180]
                         }}
                         transition={{ 
@@ -360,13 +360,13 @@ export default function Landing() {
                           delay: index * 0.4 + 0.5
                         }}
                       />
-                      {/* Dimension 4 - Near shadow */}
+                      {/* Dimension 4 - Near shadow - BRIGHTER */}
                       <motion.div 
-                        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 to-accent/30 blur-lg"
-                        style={{ transform: "translateZ(-20px)" }}
+                        className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/50 to-accent/50 blur-xl"
+                        style={{ transform: "translateZ(-30px)" }}
                         animate={{ 
-                          scale: [1.2, 1.3, 1.2],
-                          opacity: [0.5, 0.8, 0.5],
+                          scale: [1.3, 1.4, 1.3],
+                          opacity: [0.7, 1, 0.7],
                           rotateX: [0, 20, 0],
                           rotateY: [0, 20, 0]
                         }}
@@ -377,15 +377,15 @@ export default function Landing() {
                           delay: index * 0.4 + 1
                         }}
                       />
-                      {/* Dimension 3 - Container */}
+                      {/* Dimension 3 - Container - BRIGHTER */}
                       <motion.div 
-                        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 shadow-xl shadow-primary/20"
+                        className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/40 to-primary/20 shadow-2xl shadow-primary/40"
                         style={{ transformStyle: "preserve-3d" }}
                         animate={{ 
-                          scale: [1, 1.05, 1],
-                          rotateX: [0, 5, 0, -5, 0],
-                          rotateY: [0, 5, 0, -5, 0],
-                          rotateZ: [0, 3, 0, -3, 0]
+                          scale: [1, 1.08, 1],
+                          rotateX: [0, 8, 0, -8, 0],
+                          rotateY: [0, 8, 0, -8, 0],
+                          rotateZ: [0, 5, 0, -5, 0]
                         }}
                         transition={{ 
                           duration: 5,
@@ -394,15 +394,15 @@ export default function Landing() {
                           delay: index * 0.3
                         }}
                         whileHover={{ 
-                          scale: 1.15,
+                          scale: 1.2,
                           rotateY: 180,
-                          rotateX: 20,
+                          rotateX: 25,
                           transition: { duration: 0.8 }
                         }}
                       >
-                        {/* Dimension 2 - Inner glow */}
-                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 to-transparent blur-md"></div>
-                        {/* Dimension 1 - Icon */}
+                        {/* Dimension 2 - Inner glow - BRIGHTER */}
+                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/60 to-accent/40 blur-lg"></div>
+                        {/* Dimension 1 - Icon - BRIGHTER */}
                         <motion.div
                           className="absolute inset-0 flex items-center justify-center"
                           animate={{
@@ -414,12 +414,12 @@ export default function Landing() {
                             ease: "linear"
                           }}
                         >
-                          <feature.icon className="h-8 w-8 text-primary relative z-10 drop-shadow-2xl" />
+                          <feature.icon className="h-10 w-10 text-primary relative z-10 drop-shadow-2xl filter brightness-125" />
                         </motion.div>
                       </motion.div>
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-center">{feature.title}</h3>
-                    <p className="text-muted-foreground text-center leading-relaxed">{feature.description}</p>
+                    <h3 className="text-xl font-bold mb-4 text-center">{feature.title}</h3>
+                    <p className="text-muted-foreground text-center leading-relaxed text-sm">{feature.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
