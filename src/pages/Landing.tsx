@@ -49,9 +49,57 @@ export default function Landing() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated Background Pattern */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute top-0 -right-4 w-72 h-72 bg-accent/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+        
+        {/* Floating Shapes */}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-16 h-16 border-2 border-primary/20 rounded-lg"
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 90, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute top-1/3 right-1/4 w-12 h-12 border-2 border-accent/20 rounded-full"
+          animate={{
+            y: [0, 30, 0],
+            x: [0, -20, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-1/3 w-20 h-20 border-2 border-primary/20"
+          animate={{
+            rotate: [0, 180, 360],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </div>
+
       {/* Header */}
-      <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50 shadow-sm">
+      <header className="border-b sticky top-0 bg-background/80 backdrop-blur-xl z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -63,11 +111,11 @@ export default function Landing() {
                 Browse
               </Button>
               {isAuthenticated ? (
-                <Button onClick={() => navigate("/list-business")} size="lg" className="text-base">
+                <Button onClick={() => navigate("/list-business")} size="lg" className="text-base shadow-lg shadow-primary/20">
                   List Your Business
                 </Button>
               ) : (
-                <Button onClick={() => navigate("/auth")} size="lg" className="text-base">Get Started</Button>
+                <Button onClick={() => navigate("/auth")} size="lg" className="text-base shadow-lg shadow-primary/20">Get Started</Button>
               )}
             </div>
           </div>
@@ -75,8 +123,7 @@ export default function Landing() {
       </header>
 
       {/* Hero Section - Enhanced */}
-      <section className="relative py-16 md:py-24 bg-gradient-to-br from-primary/5 via-background to-accent/5 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      <section className="relative py-16 md:py-24 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -84,24 +131,29 @@ export default function Landing() {
             transition={{ duration: 0.7 }}
             className="text-center max-w-5xl mx-auto"
           >
-            <div className="inline-flex items-center gap-2 bg-primary/15 text-primary px-6 py-3 rounded-full mb-8 border border-primary/20">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/20 to-accent/20 text-primary px-6 py-3 rounded-full mb-8 border border-primary/30 shadow-lg shadow-primary/10 backdrop-blur-sm"
+            >
               <Zap className="h-5 w-5" />
               <span className="text-sm font-semibold">Egypt's #1 Business Marketplace</span>
-            </div>
+            </motion.div>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
               Buy & Sell Businesses
               <br />
-              <span className="text-primary bg-clip-text">With Confidence</span>
+              <span className="text-primary bg-clip-text bg-gradient-to-r from-primary to-accent">With Confidence</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
               Discover profitable opportunities across Egypt. Connect with verified sellers, access transparent financials, and grow your entrepreneurial portfolio.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button size="lg" onClick={() => navigate("/browse")} className="text-lg px-8 py-6 h-auto shadow-lg hover:shadow-xl transition-all">
+              <Button size="lg" onClick={() => navigate("/browse")} className="text-lg px-8 py-6 h-auto shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all hover:scale-105">
                 Explore Businesses
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => navigate("/list-business")} className="text-lg px-8 py-6 h-auto border-2">
+              <Button size="lg" variant="outline" onClick={() => navigate("/list-business")} className="text-lg px-8 py-6 h-auto border-2 shadow-lg hover:shadow-xl transition-all hover:scale-105">
                 Sell Your Business
               </Button>
             </div>
@@ -114,7 +166,8 @@ export default function Landing() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 + index * 0.1 }}
-                  className="text-center"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="text-center bg-card/50 backdrop-blur-sm rounded-xl p-4 border border-border/50 shadow-lg"
                 >
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-1">{stat.value}</div>
                   <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
@@ -125,8 +178,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Categories Section - New */}
-      <section className="py-16 bg-muted/30">
+      {/* Categories Section - Enhanced with 3D effect */}
+      <section className="py-16 bg-muted/30 relative">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -150,13 +203,20 @@ export default function Landing() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.08, y: -8 }}
                 className="cursor-pointer"
                 onClick={() => navigate("/browse")}
               >
-                <Card className="h-full hover:shadow-lg transition-all border-2 hover:border-primary/50">
-                  <CardContent className="pt-6 pb-6 text-center">
-                    <div className="text-4xl mb-3">{category.icon}</div>
+                <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/50 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <CardContent className="pt-6 pb-6 text-center relative z-10">
+                    <motion.div 
+                      className="text-4xl mb-3 filter drop-shadow-lg"
+                      whileHover={{ scale: 1.2, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      {category.icon}
+                    </motion.div>
                     <h3 className="font-bold text-sm mb-1">{category.name}</h3>
                     <p className="text-xs text-muted-foreground">{category.count} listings</p>
                   </CardContent>
@@ -167,8 +227,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Features Section - Enhanced */}
-      <section className="py-20 bg-background">
+      {/* Features Section - Enhanced with 3D Icons */}
+      <section className="py-20 bg-background relative">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -192,12 +252,19 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -10 }}
               >
-                <Card className="h-full hover:shadow-xl transition-all border-2 hover:border-primary/30">
-                  <CardContent className="pt-8 pb-8">
-                    <div className="h-14 w-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 mx-auto">
-                      <feature.icon className="h-7 w-7 text-primary" />
-                    </div>
+                <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/30 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <CardContent className="pt-8 pb-8 relative z-10">
+                    <motion.div 
+                      className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6 mx-auto shadow-xl shadow-primary/20 relative"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/30 to-transparent blur-md"></div>
+                      <feature.icon className="h-8 w-8 text-primary relative z-10 drop-shadow-lg" />
+                    </motion.div>
                     <h3 className="text-xl font-bold mb-3 text-center">{feature.title}</h3>
                     <p className="text-muted-foreground text-center leading-relaxed">{feature.description}</p>
                   </CardContent>
@@ -209,7 +276,7 @@ export default function Landing() {
       </section>
 
       {/* How It Works - Enhanced */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-muted/30 relative">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -238,19 +305,25 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
                 className="relative"
               >
-                <Card className="h-full border-2">
-                  <CardContent className="pt-8 pb-8">
-                    <div className="text-6xl font-bold text-primary/20 mb-4 text-center">{step.number}</div>
+                <Card className="h-full border-2 shadow-lg hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <CardContent className="pt-8 pb-8 relative z-10">
+                    <div className="text-6xl font-bold bg-gradient-to-br from-primary/30 to-primary/10 bg-clip-text text-transparent mb-4 text-center drop-shadow-lg">{step.number}</div>
                     <h3 className="text-xl font-bold mb-3 text-center">{step.title}</h3>
                     <p className="text-muted-foreground text-center leading-relaxed">{step.description}</p>
                   </CardContent>
                 </Card>
                 {index < 3 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                    <ArrowRight className="h-8 w-8 text-primary/30" />
-                  </div>
+                  <motion.div 
+                    className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10"
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <ArrowRight className="h-8 w-8 text-primary/40 drop-shadow-lg" />
+                  </motion.div>
                 )}
               </motion.div>
             ))}
@@ -260,7 +333,17 @@ export default function Landing() {
 
       {/* CTA Section - Enhanced */}
       <section className="py-24 bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+        <motion.div
+          className="absolute top-10 right-10 w-32 h-32 border-2 border-primary-foreground/10 rounded-full"
+          animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+          transition={{ duration: 20, repeat: Infinity }}
+        />
+        <motion.div
+          className="absolute bottom-10 left-10 w-24 h-24 border-2 border-primary-foreground/10 rounded-lg"
+          animate={{ rotate: [0, 90, 0], y: [0, -20, 0] }}
+          transition={{ duration: 15, repeat: Infinity }}
+        />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -279,7 +362,7 @@ export default function Landing() {
                 size="lg"
                 variant="secondary"
                 onClick={() => navigate("/browse")}
-                className="text-lg px-10 py-7 h-auto shadow-2xl hover:shadow-xl transition-all"
+                className="text-lg px-10 py-7 h-auto shadow-2xl hover:shadow-xl transition-all hover:scale-105"
               >
                 Explore Businesses
                 <ArrowRight className="ml-2 h-6 w-6" />
@@ -288,7 +371,7 @@ export default function Landing() {
                 size="lg"
                 variant="outline"
                 onClick={() => navigate(isAuthenticated ? "/list-business" : "/auth")}
-                className="text-lg px-10 py-7 h-auto bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all"
+                className="text-lg px-10 py-7 h-auto bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all hover:scale-105"
               >
                 List Your Business
               </Button>
@@ -298,7 +381,7 @@ export default function Landing() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t py-12 bg-muted/20">
+      <footer className="border-t py-12 bg-muted/20 backdrop-blur-sm">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
