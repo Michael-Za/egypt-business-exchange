@@ -1,9 +1,25 @@
 import { action } from "./_generated/server";
-import { internal } from "./_generated/api";
+import { api, internal } from "./_generated/api";
 
 export const seed = action({
   args: {},
   handler: async (ctx) => {
+    // First, ensure we have at least one user to assign as owner
+    const existingUsers = await ctx.runQuery(api.users.list);
+    
+    let adminUserId;
+    if (existingUsers.length === 0) {
+      // Create a default admin user for seeding purposes
+      adminUserId = await ctx.runMutation(api.users.createSeedUser, {
+        email: "admin@businessexchange.eg",
+        name: "Admin User",
+      });
+      console.log("Created default admin user for seeding");
+    } else {
+      adminUserId = existingUsers[0]._id;
+      console.log("Using existing user for seeding");
+    }
+
     const sampleBusinesses = [
       {
         name: "Cairo Coffee House",
