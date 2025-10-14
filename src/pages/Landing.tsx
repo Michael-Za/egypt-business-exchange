@@ -571,7 +571,7 @@ export default function Landing() {
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => navigate(isAuthenticated ? "/list-business" : "/auth")}
+                onClick={() => navigate("/list-business")}
                 className="text-lg px-10 py-7 h-auto bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all hover:scale-105"
               >
                 List Your Business
