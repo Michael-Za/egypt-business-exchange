@@ -56,7 +56,7 @@ export default function Browse() {
               <span className="font-bold text-xl">Business Exchange</span>
             </div>
             <div className="flex items-center gap-4">
-              {isAuthenticated ? (
+              {isAuthenticated && (
                 <>
                   <Button variant="outline" onClick={() => navigate("/my-listings")}>
                     My Listings
@@ -65,8 +65,6 @@ export default function Browse() {
                     List Your Business
                   </Button>
                 </>
-              ) : (
-                <Button onClick={() => navigate("/auth")}>Sign In</Button>
               )}
             </div>
           </div>
