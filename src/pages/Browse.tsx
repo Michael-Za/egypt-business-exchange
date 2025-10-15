@@ -3,7 +3,6 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/convex/_generated/api";
-import { useAuth } from "@/hooks/use-auth";
 import { motion } from "framer-motion";
 import { Building2, Eye, Loader2, MapPin, Search, TrendingUp } from "lucide-react";
 import { useState } from "react";
@@ -12,7 +11,6 @@ import { useNavigate } from "react-router";
 
 export default function Browse() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
   const [minPrice, setMinPrice] = useState<number | undefined>();

@@ -83,7 +83,6 @@ export default function BusinessDetail() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-              <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
               <span className="font-bold text-xl">Business Exchange</span>
             </div>
             <Button variant="outline" onClick={() => navigate("/browse")}>

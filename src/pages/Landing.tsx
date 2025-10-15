@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useAuth } from "@/hooks/use-auth";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Shield, TrendingUp, Clock, Award, Zap } from "lucide-react";
 import { useNavigate } from "react-router";
@@ -8,7 +7,6 @@ import { useRef } from "react";
 
 export default function Landing() {
   const navigate = useNavigate();
-  const { isAuthenticated, isLoading } = useAuth();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
