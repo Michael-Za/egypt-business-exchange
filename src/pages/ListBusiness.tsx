@@ -59,8 +59,10 @@ export default function ListBusiness() {
         contactPhone: formData.contactPhone,
       });
 
-      toast.success("Business listed successfully!");
-      navigate("/browse");
+      toast.success("Business listed successfully! Redirecting to home...");
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
     } catch (error) {
       toast.error("Failed to list business");
       setSubmitting(false);
@@ -95,9 +97,14 @@ export default function ListBusiness() {
               <Building2 className="h-8 w-8 text-primary" />
               <span className="font-bold text-xl">Business Exchange</span>
             </div>
-            <Button variant="outline" onClick={() => navigate("/browse")} className="shadow-sm">
-              Cancel
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button variant="outline" onClick={() => navigate("/")} className="shadow-sm">
+                Back to Home
+              </Button>
+              <Button variant="ghost" onClick={() => navigate("/browse")} className="shadow-sm">
+                Browse
+              </Button>
+            </div>
           </div>
         </div>
       </header>
