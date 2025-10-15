@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { getCurrentUser } from "./users";
 
 export const list = query({
   args: {
@@ -62,14 +61,12 @@ export const create = mutation({
     contactPhone: v.string(),
   },
   handler: async (ctx, args) => {
-    const user = await getCurrentUser(ctx);
-    if (!user) {
-      throw new Error("Must be authenticated to create a business listing");
-    }
+    // Create a default owner ID for all listings
+    const defaultOwnerId = "default_owner" as any;
 
     const businessId = await ctx.db.insert("businesses", {
       ...args,
-      ownerId: user._id,
+      ownerId: defaultOwnerId,
       status: "active",
       views: 0,
     });
@@ -93,12 +90,8 @@ export const incrementViews = mutation({
 export const getMyListings = query({
   args: {},
   handler: async (ctx) => {
-    const user = await getCurrentUser(ctx);
-    if (!user) return [];
-
-    return await ctx.db
-      .query("businesses")
-      .filter((q) => q.eq(q.field("ownerId"), user._id))
-      .collect();
+    // Without authentication, return all listings so the page functions correctly
+    const businesses = await ctx.db.query("businesses").collect();
+    return businesses.sort((a, b) => b._creationTime - a._creationTime);
   },
 });
