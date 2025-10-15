@@ -1,4 +1,3 @@
-import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { Infer, v } from "convex/values";
 
@@ -17,8 +16,6 @@ export type Role = Infer<typeof roleValidator>;
 
 const schema = defineSchema(
   {
-    ...authTables,
-
     users: defineTable({
       name: v.optional(v.string()),
       image: v.optional(v.string()),
