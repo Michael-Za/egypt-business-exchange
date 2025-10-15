@@ -2,17 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/hooks/use-auth";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Building2, CheckCircle, Search, TrendingUp, Users, Shield, Clock, Award, Zap } from "lucide-react";
+import { ArrowRight, Shield, TrendingUp, Clock, Award, Zap } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useRef } from "react";
 
 export default function Landing() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
+
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
   });
 
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
@@ -23,22 +24,26 @@ export default function Landing() {
     {
       icon: Shield,
       title: "Verified Listings",
-      description: "All businesses are verified with transparent financial records and documentation",
+      description:
+        "All businesses are verified with transparent financial records and documentation",
     },
     {
       icon: TrendingUp,
       title: "Real Financial Data",
-      description: "Access actual revenue, profit margins, and growth metrics for informed decisions",
+      description:
+        "Access actual revenue, profit margins, and growth metrics for informed decisions",
     },
     {
       icon: Clock,
       title: "Quick Transactions",
-      description: "Connect directly with sellers and close deals faster with our streamlined process",
+      description:
+        "Connect directly with sellers and close deals faster with our streamlined process",
     },
     {
       icon: Award,
       title: "Trusted Platform",
-      description: "Egypt's most trusted marketplace for buying and selling established businesses",
+      description:
+        "Egypt's most trusted marketplace for buying and selling established businesses",
     },
   ];
 
@@ -60,54 +65,31 @@ export default function Landing() {
 
   return (
     <div ref={containerRef} className="min-h-screen relative overflow-hidden">
-      {/* Animated Background Pattern */}
-      <motion.div 
+      {/* Animated Background */}
+      <motion.div
         style={{ y: backgroundY }}
         className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
       >
-        <div className="absolute top-0 -left-4 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute top-0 -right-4 w-72 h-72 bg-accent/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
-        
-        {/* Floating Shapes */}
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
+        <div className="absolute top-0 -right-4 w-72 h-72 bg-accent/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-primary/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]" />
+
         <motion.div
           className="absolute top-1/4 left-1/4 w-16 h-16 border-2 border-primary/20 rounded-lg"
-          animate={{
-            y: [0, -20, 0],
-            rotate: [0, 90, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, -20, 0], rotate: [0, 90, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute top-1/3 right-1/4 w-12 h-12 border-2 border-accent/20 rounded-full"
-          animate={{
-            y: [0, 30, 0],
-            x: [0, -20, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, 30, 0], x: [0, -20, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-1/4 right-1/3 w-20 h-20 border-2 border-primary/20"
-          animate={{
-            rotate: [0, 180, 360],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ rotate: [0, 180, 360], scale: [1, 1.1, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
       </motion.div>
 
@@ -115,16 +97,26 @@ export default function Landing() {
       <header className="border-b sticky top-0 bg-background/80 backdrop-blur-xl z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <img src="/logo.svg" alt="Logo" className="h-10 w-10" />
+            <div
+              className="flex items-center gap-2 cursor-pointer"
+              onClick={() => navigate("/")}
+            >
               <span className="font-bold text-2xl">Business Exchange</span>
             </div>
             <div className="flex items-center gap-4">
-              <Button variant="ghost" onClick={() => navigate("/browse")} className="text-base">
+              <Button
+                variant="ghost"
+                onClick={() => navigate("/browse")}
+                className="text-base"
+              >
                 Browse
               </Button>
-              {isAuthenticated && (
-                <Button onClick={() => navigate("/list-business")} size="lg" className="text-base shadow-lg shadow-primary/20">
+              {!isLoading && isAuthenticated && (
+                <Button
+                  onClick={() => navigate("/list-business")}
+                  size="lg"
+                  className="text-base shadow-lg shadow-primary/20"
+                >
                   List Your Business
                 </Button>
               )}
@@ -133,9 +125,9 @@ export default function Landing() {
         </div>
       </header>
 
-      {/* Hero Section - Enhanced */}
+      {/* Hero */}
       <section className="relative py-16 md:py-24 overflow-hidden">
-        <motion.div 
+        <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
           className="container mx-auto px-4 relative z-10"
         >
@@ -152,27 +144,42 @@ export default function Landing() {
               className="inline-flex items-center gap-2 bg-gradient-to-r from-primary/20 to-accent/20 text-primary px-6 py-3 rounded-full mb-8 border border-primary/30 shadow-lg shadow-primary/10 backdrop-blur-sm"
             >
               <Zap className="h-5 w-5" />
-              <span className="text-sm font-semibold">Egypt's #1 Business Marketplace</span>
+              <span className="text-sm font-semibold">
+                Egypt&apos;s #1 Business Marketplace
+              </span>
             </motion.div>
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
               Buy & Sell Businesses
               <br />
-              <span className="text-primary bg-clip-text bg-gradient-to-r from-primary to-accent">With Confidence</span>
+              <span className="text-primary bg-clip-text bg-gradient-to-r from-primary to-accent">
+                With Confidence
+              </span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed">
-              Discover profitable opportunities across Egypt. Connect with verified sellers, access transparent financials, and grow your entrepreneurial portfolio.
+              Discover profitable opportunities across Egypt. Connect with
+              verified sellers, access transparent financials, and grow your
+              entrepreneurial portfolio.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button size="lg" onClick={() => navigate("/browse")} className="text-lg px-8 py-6 h-auto shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all hover:scale-105">
+              <Button
+                size="lg"
+                onClick={() => navigate("/browse")}
+                className="text-lg px-8 py-6 h-auto shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 transition-all hover:scale-105"
+              >
                 Explore Businesses
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button size="lg" variant="outline" onClick={() => navigate("/list-business")} className="text-lg px-8 py-6 h-auto border-2 shadow-lg hover:shadow-xl transition-all hover:scale-105">
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() => navigate("/list-business")}
+                className="text-lg px-8 py-6 h-auto border-2 shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              >
                 Sell Your Business
               </Button>
             </div>
 
-            {/* Stats Bar */}
+            {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-16">
               {stats.map((stat, index) => (
                 <motion.div
@@ -183,8 +190,12 @@ export default function Landing() {
                   whileHover={{ scale: 1.05, y: -5 }}
                   className="text-center bg-card/50 backdrop-blur-sm rounded-xl p-4 border border-border/50 shadow-lg"
                 >
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-1">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-muted-foreground font-medium">
+                    {stat.label}
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -192,7 +203,7 @@ export default function Landing() {
         </motion.div>
       </section>
 
-      {/* Categories Section - Enhanced with 3D effect */}
+      {/* Categories */}
       <section className="py-16 bg-muted/30 relative">
         <div className="container mx-auto px-4">
           <motion.div
@@ -213,80 +224,22 @@ export default function Landing() {
             {categories.map((category, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.08, y: -8 }}
+                whileHover={{ scale: 1.05, y: -6 }}
                 className="cursor-pointer"
                 onClick={() => navigate("/browse")}
               >
                 <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/50 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration:300" />
                   <CardContent className="pt-6 pb-6 text-center relative z-10">
-                    <div className="relative perspective-1000">
-                      <motion.div 
-                        className="text-4xl mb-3 relative z-10"
-                        style={{ transformStyle: "preserve-3d" }}
-                        animate={{ 
-                          y: [0, -8, 0],
-                          rotateX: [0, 10, 0, -10, 0],
-                          rotateY: [0, 10, 0, -10, 0],
-                          rotateZ: [0, 5, 0, -5, 0],
-                          scale: [1, 1.05, 1, 1.05, 1]
-                        }}
-                        transition={{ 
-                          duration: 6,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.3
-                        }}
-                        whileHover={{ 
-                          scale: 1.3, 
-                          rotateY: 180,
-                          rotateX: 20,
-                          transition: { duration: 0.6 }
-                        }}
-                      >
-                        {category.icon}
-                      </motion.div>
-                      {/* Layer 1 - Shadow dimension */}
-                      <motion.div 
-                        className="absolute inset-0 text-4xl blur-md opacity-40"
-                        style={{ transform: "translateZ(-20px)" }}
-                        animate={{ 
-                          scale: [1.1, 1.2, 1.1],
-                          opacity: [0.3, 0.5, 0.3]
-                        }}
-                        transition={{ 
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.3 + 0.5
-                        }}
-                      >
-                        {category.icon}
-                      </motion.div>
-                      {/* Layer 2 - Glow dimension */}
-                      <motion.div 
-                        className="absolute inset-0 text-4xl blur-xl opacity-20"
-                        style={{ transform: "translateZ(-40px)" }}
-                        animate={{ 
-                          scale: [1.2, 1.4, 1.2],
-                          opacity: [0.2, 0.4, 0.2]
-                        }}
-                        transition={{ 
-                          duration: 5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.3 + 1
-                        }}
-                      >
-                        {category.icon}
-                      </motion.div>
-                    </div>
+                    <div className="text-4xl mb-3">{category.icon}</div>
                     <h3 className="font-bold text-sm mb-1">{category.name}</h3>
-                    <p className="text-xs text-muted-foreground">{category.count} listings</p>
+                    <p className="text-xs text-muted-foreground">
+                      {category.count} listings
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -295,7 +248,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Features Section - Enhanced with 6D Icons */}
+      {/* Features */}
       <section className="py-20 bg-gradient-to-b from-background to-muted/20 relative">
         <div className="container mx-auto px-4">
           <motion.div
@@ -308,7 +261,8 @@ export default function Landing() {
               Why Choose Business Exchange?
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              The most trusted and efficient platform for business transactions in Egypt
+              The most trusted and efficient platform for business transactions
+              in Egypt
             </p>
           </motion.div>
 
@@ -320,104 +274,19 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
+                whileHover={{ y: -8 }}
               >
                 <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/50 bg-gradient-to-br from-card via-card to-primary/5 backdrop-blur-sm relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <CardContent className="pt-10 pb-10 relative z-10">
-                    <div className="relative h-20 w-20 mx-auto mb-8" style={{ perspective: "1200px" }}>
-                      {/* Dimension 6 - Deepest glow - BRIGHTER */}
-                      <motion.div 
-                        className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/30 to-accent/30 blur-3xl"
-                        style={{ transform: "translateZ(-80px)" }}
-                        animate={{ 
-                          scale: [1.5, 1.8, 1.5],
-                          opacity: [0.5, 0.9, 0.5],
-                          rotate: [0, 180, 360]
-                        }}
-                        transition={{ 
-                          duration: 8,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.4
-                        }}
-                      />
-                      {/* Dimension 5 - Mid glow - BRIGHTER */}
-                      <motion.div 
-                        className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/40 to-accent/40 blur-2xl"
-                        style={{ transform: "translateZ(-50px)" }}
-                        animate={{ 
-                          scale: [1.4, 1.6, 1.4],
-                          opacity: [0.6, 0.9, 0.6],
-                          rotate: [0, -90, -180]
-                        }}
-                        transition={{ 
-                          duration: 7,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.4 + 0.5
-                        }}
-                      />
-                      {/* Dimension 4 - Near shadow - BRIGHTER */}
-                      <motion.div 
-                        className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/50 to-accent/50 blur-xl"
-                        style={{ transform: "translateZ(-30px)" }}
-                        animate={{ 
-                          scale: [1.3, 1.4, 1.3],
-                          opacity: [0.7, 1, 0.7],
-                          rotateX: [0, 20, 0],
-                          rotateY: [0, 20, 0]
-                        }}
-                        transition={{ 
-                          duration: 6,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.4 + 1
-                        }}
-                      />
-                      {/* Dimension 3 - Container - BRIGHTER */}
-                      <motion.div 
-                        className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/40 to-primary/20 shadow-2xl shadow-primary/40"
-                        style={{ transformStyle: "preserve-3d" }}
-                        animate={{ 
-                          scale: [1, 1.08, 1],
-                          rotateX: [0, 8, 0, -8, 0],
-                          rotateY: [0, 8, 0, -8, 0],
-                          rotateZ: [0, 5, 0, -5, 0]
-                        }}
-                        transition={{ 
-                          duration: 5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.3
-                        }}
-                        whileHover={{ 
-                          scale: 1.2,
-                          rotateY: 180,
-                          rotateX: 25,
-                          transition: { duration: 0.8 }
-                        }}
-                      >
-                        {/* Dimension 2 - Inner glow - BRIGHTER */}
-                        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/60 to-accent/40 blur-lg"></div>
-                        {/* Dimension 1 - Icon - BRIGHTER */}
-                        <motion.div
-                          className="absolute inset-0 flex items-center justify-center"
-                          animate={{
-                            rotateZ: [0, 360]
-                          }}
-                          transition={{
-                            duration: 20,
-                            repeat: Infinity,
-                            ease: "linear"
-                          }}
-                        >
-                          <feature.icon className="h-10 w-10 text-primary relative z-10 drop-shadow-2xl filter brightness-125" />
-                        </motion.div>
-                      </motion.div>
+                    <div className="h-20 w-20 mx-auto mb-8 flex items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 shadow-lg">
+                      <feature.icon className="h-10 w-10 text-primary" />
                     </div>
-                    <h3 className="text-xl font-bold mb-4 text-center">{feature.title}</h3>
-                    <p className="text-muted-foreground text-center leading-relaxed text-sm">{feature.description}</p>
+                    <h3 className="text-xl font-bold mb-4 text-center">
+                      {feature.title}
+                    </h3>
+                    <p className="text-muted-foreground text-center leading-relaxed text-sm">
+                      {feature.description}
+                    </p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -426,7 +295,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* How It Works - Enhanced */}
+      {/* How It Works */}
       <section className="py-20 bg-muted/30 relative">
         <div className="container mx-auto px-4">
           <motion.div
@@ -445,10 +314,30 @@ export default function Landing() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
             {[
-              { number: "01", title: "Browse Listings", description: "Explore hundreds of verified businesses across various industries and locations" },
-              { number: "02", title: "Review Details", description: "Analyze comprehensive financials, operations data, and growth potential metrics" },
-              { number: "03", title: "Contact Seller", description: "Connect directly with business owners and schedule meetings to discuss details" },
-              { number: "04", title: "Close the Deal", description: "Negotiate terms, complete due diligence, and finalize your acquisition" },
+              {
+                number: "01",
+                title: "Browse Listings",
+                description:
+                  "Explore hundreds of verified businesses across various industries and locations",
+              },
+              {
+                number: "02",
+                title: "Review Details",
+                description:
+                  "Analyze comprehensive financials, operations data, and growth potential metrics",
+              },
+              {
+                number: "03",
+                title: "Contact Seller",
+                description:
+                  "Connect directly with business owners and schedule meetings to discuss details",
+              },
+              {
+                number: "04",
+                title: "Close the Deal",
+                description:
+                  "Negotiate terms, complete due diligence, and finalize your acquisition",
+              },
             ].map((step, index) => (
               <motion.div
                 key={index}
@@ -456,38 +345,32 @@ export default function Landing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="relative"
+                whileHover={{ y: -6 }}
               >
                 <Card className="h-full border-2 shadow-lg hover:shadow-2xl transition-all duration-300 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <CardContent className="pt-8 pb-8 relative z-10">
-                    <div className="text-6xl font-bold bg-gradient-to-br from-primary/30 to-primary/10 bg-clip-text text-transparent mb-4 text-center drop-shadow-lg">{step.number}</div>
-                    <h3 className="text-xl font-bold mb-3 text-center">{step.title}</h3>
-                    <p className="text-muted-foreground text-center leading-relaxed">{step.description}</p>
+                    <div className="text-6xl font-bold bg-gradient-to-br from-primary/30 to-primary/10 bg-clip-text text-transparent mb-4 text-center drop-shadow-lg">
+                      {step.number}
+                    </div>
+                    <h3 className="text-xl font-bold mb-3 text-center">
+                      {step.title}
+                    </h3>
+                    <p className="text-muted-foreground text-center leading-relaxed">
+                      {step.description}
+                    </p>
                   </CardContent>
                 </Card>
-                {index < 3 && (
-                  <motion.div 
-                    className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10"
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    <ArrowRight className="h-8 w-8 text-primary/40 drop-shadow-lg" />
-                  </motion.div>
-                )}
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section - Enhanced */}
+      {/* CTA */}
       <section className="py-24 bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
-        
-        {/* Scattered falling/throwing stars across the section */}
-        {[...Array(25)].map((_, i) => (
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:14px_24px]" />
+
+        {[...Array(18)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full"
@@ -509,31 +392,7 @@ export default function Landing() {
             }}
           />
         ))}
-        
-        {/* Space-themed element with stars */}
-        <motion.div
-          className="absolute top-10 right-10 w-32 h-32 rounded-full bg-black/80 backdrop-blur-sm overflow-hidden"
-          animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
-          transition={{ duration: 20, repeat: Infinity }}
-        >
-          {/* Stars */}
-          <div className="absolute top-4 left-6 w-1 h-1 bg-white rounded-full animate-pulse"></div>
-          <div className="absolute top-8 right-8 w-0.5 h-0.5 bg-white rounded-full"></div>
-          <div className="absolute bottom-6 left-10 w-1.5 h-1.5 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-          <div className="absolute top-12 left-16 w-0.5 h-0.5 bg-white rounded-full"></div>
-          <div className="absolute bottom-10 right-6 w-1 h-1 bg-white rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-16 right-12 w-0.5 h-0.5 bg-white rounded-full"></div>
-          <div className="absolute bottom-14 left-8 w-1 h-1 bg-white rounded-full"></div>
-          <div className="absolute top-6 right-14 w-0.5 h-0.5 bg-white rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-          <div className="absolute bottom-8 right-10 w-0.5 h-0.5 bg-white rounded-full"></div>
-          <div className="absolute top-14 left-12 w-1 h-1 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.8s' }}></div>
-        </motion.div>
-        
-        <motion.div
-          className="absolute bottom-10 left-10 w-24 h-24 border-2 border-primary-foreground/10 rounded-lg"
-          animate={{ rotate: [0, 90, 0], y: [0, -20, 0] }}
-          transition={{ duration: 15, repeat: Infinity }}
-        />
+
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -545,19 +404,13 @@ export default function Landing() {
               Ready to Get Started?
             </h2>
             <p className="text-xl md:text-2xl mb-10 opacity-95 leading-relaxed">
-              Join thousands of entrepreneurs buying and selling businesses across Egypt. Your next opportunity awaits.
+              Join thousands of entrepreneurs buying and selling businesses
+              across Egypt. Your next opportunity awaits.
             </p>
-            <motion.div 
+            <motion.div
               className="flex flex-col sm:flex-row gap-6 justify-center"
-              animate={{
-                y: [0, -15, 0],
-                rotateX: [0, 2, 0, -2, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              animate={{ y: [0, -15, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
               <Button
                 size="lg"
