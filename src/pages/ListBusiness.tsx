@@ -5,19 +5,16 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { api } from "@/convex/_generated/api";
-import { useAuth } from "@/hooks/use-auth";
 import { motion } from "framer-motion";
 import { Loader2, Building2, DollarSign, TrendingUp, Users, Calendar, MapPin, Mail, Phone, Image as ImageIcon } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useMutation } from "convex/react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 export default function ListBusiness() {
   const navigate = useNavigate();
-  const { isLoading, isAuthenticated, signIn } = useAuth();
   const [submitting, setSubmitting] = useState(false);
-  const [autoAuthenticating, setAutoAuthenticating] = useState(false);
   const createBusiness = useMutation(api.businesses.create);
 
   const [formData, setFormData] = useState({
@@ -35,40 +32,6 @@ export default function ListBusiness() {
     contactEmail: "",
     contactPhone: "",
   });
-
-  // Auto-authenticate as guest if not authenticated
-  useEffect(() => {
-    const autoSignIn = async () => {
-      if (!isLoading && !isAuthenticated) {
-        setAutoAuthenticating(true);
-        try {
-          await signIn("anonymous");
-        } catch (error) {
-          console.error("Auto guest sign-in failed:", error);
-          toast.error("Failed to initialize. Please try again.");
-        } finally {
-          setAutoAuthenticating(false);
-        }
-      }
-    };
-    
-    autoSignIn();
-  }, [isLoading, isAuthenticated, signIn]);
-
-  if (isLoading || autoAuthenticating) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/20">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center"
-        >
-          <Loader2 className="h-12 w-12 animate-spin text-primary mx-auto mb-4" />
-          <p className="text-muted-foreground">Preparing your listing form...</p>
-        </motion.div>
-      </div>
-    );
-  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
