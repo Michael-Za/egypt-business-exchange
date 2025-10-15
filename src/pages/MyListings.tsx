@@ -1,42 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/convex/_generated/api";
-import { useAuth } from "@/hooks/use-auth";
 import { motion } from "framer-motion";
-import { Building2, Eye, Loader2, MapPin, Search, TrendingUp } from "lucide-react";
-import { useState } from "react";
+import { Building2, Eye, Loader2, MapPin, TrendingUp } from "lucide-react";
 import { useQuery } from "convex/react";
 import { useNavigate } from "react-router";
 
-export default function Browse() {
+export default function MyListings() {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [category, setCategory] = useState("all");
-  const [minPrice, setMinPrice] = useState<number | undefined>();
-  const [maxPrice, setMaxPrice] = useState<number | undefined>();
-
-  const businesses = useQuery(api.businesses.list, {
-    category: category === "all" ? undefined : category,
-    searchQuery: searchQuery || undefined,
-    minPrice,
-    maxPrice,
-  });
-
-  const categories = [
-    { value: "all", label: "All Categories" },
-    { value: "restaurant", label: "Restaurant & Cafe" },
-    { value: "retail", label: "Retail & Shop" },
-    { value: "manufacturing", label: "Manufacturing" },
-    { value: "services", label: "Services" },
-    { value: "technology", label: "Technology" },
-    { value: "healthcare", label: "Healthcare" },
-    { value: "education", label: "Education" },
-    { value: "real-estate", label: "Real Estate" },
-    { value: "other", label: "Other" },
-  ];
+  const myListings = useQuery(api.businesses.getMyListings);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-EG", {
@@ -56,8 +28,8 @@ export default function Browse() {
               <span className="font-bold text-xl">Business Exchange</span>
             </div>
             <div className="flex items-center gap-4">
-              <Button variant="outline" onClick={() => navigate("/my-listings")}>
-                My Listings
+              <Button variant="outline" onClick={() => navigate("/browse")}>
+                Browse
               </Button>
               <Button onClick={() => navigate("/list-business")}>
                 List Your Business
@@ -68,51 +40,32 @@ export default function Browse() {
       </header>
 
       <div className="container mx-auto px-4 py-8">
-        {/* Search & Filters */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search businesses..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9"
-              />
-            </div>
-            <Select value={category} onValueChange={setCategory}>
-              <SelectTrigger className="w-full md:w-[200px]">
-                <SelectValue placeholder="Category" />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((cat) => (
-                  <SelectItem key={cat.value} value={cat.value}>
-                    {cat.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <h1 className="text-3xl font-bold tracking-tight mb-2">My Listings</h1>
+          <p className="text-muted-foreground">Manage your business listings</p>
         </motion.div>
 
         {/* Results */}
-        {businesses === undefined ? (
+        {myListings === undefined ? (
           <div className="flex justify-center py-12">
             <Loader2 className="h-8 w-8 animate-spin" />
           </div>
-        ) : businesses.length === 0 ? (
+        ) : myListings.length === 0 ? (
           <div className="text-center py-12">
             <Building2 className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold mb-2">No businesses found</h3>
-            <p className="text-muted-foreground">Try adjusting your search criteria</p>
+            <h3 className="text-lg font-semibold mb-2">No listings yet</h3>
+            <p className="text-muted-foreground mb-4">Start by listing your first business</p>
+            <Button onClick={() => navigate("/list-business")}>
+              List Your Business
+            </Button>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {businesses.map((business, index) => (
+            {myListings.map((business, index) => (
               <motion.div
                 key={business._id}
                 initial={{ opacity: 0, y: 20 }}

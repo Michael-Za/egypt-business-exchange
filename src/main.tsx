@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound.tsx";
 import Browse from "./pages/Browse.tsx";
 import BusinessDetail from "./pages/BusinessDetail.tsx";
 import ListBusiness from "./pages/ListBusiness.tsx";
+import MyListings from "./pages/MyListings.tsx";
 import "./types/global.d.ts";
 
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
@@ -52,6 +53,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/browse" element={<Browse />} />
             <Route path="/business/:id" element={<BusinessDetail />} />
             <Route path="/list-business" element={<ListBusiness />} />
+            <Route path="/my-listings" element={<MyListings />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
