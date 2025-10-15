@@ -98,9 +98,11 @@ export default function Landing() {
           >
             {/* Person eating */}
             <circle cx="50" cy="35" r="12" fill="currentColor" opacity="0.8" />
+            {/* Body */}
             <path d="M50 47 L45 65 L40 80" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
             <path d="M50 47 L55 65 L60 80" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
             <path d="M50 50 L35 55" stroke="currentColor" strokeWidth="3" opacity="0.8" />
+            {/* Animated arm bringing food to mouth */}
             <motion.path 
               d="M50 50 L65 55" 
               stroke="currentColor" 
@@ -115,7 +117,9 @@ export default function Landing() {
                 ease: "easeInOut",
               }}
             />
-            {/* Food */}
+            {/* Plate with food */}
+            <ellipse cx="28" cy="58" rx="8" ry="3" fill="currentColor" opacity="0.6" />
+            {/* Food item being eaten */}
             <motion.circle 
               cx="65" 
               cy="45" 
@@ -130,6 +134,9 @@ export default function Landing() {
                 repeat: Infinity,
               }}
             />
+            {/* Coffee cup */}
+            <rect x="70" y="65" width="8" height="10" rx="1" fill="currentColor" opacity="0.5" />
+            <ellipse cx="74" cy="65" rx="4" ry="1.5" fill="currentColor" opacity="0.5" />
           </motion.g>
         </svg>
       )
@@ -151,8 +158,10 @@ export default function Landing() {
           >
             {/* Person shopping */}
             <circle cx="45" cy="30" r="10" fill="currentColor" opacity="0.8" />
+            {/* Body */}
             <path d="M45 40 L45 60 L40 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
             <path d="M45 60 L50 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            {/* Animated arm holding bag */}
             <motion.path 
               d="M45 45 L60 50" 
               stroke="currentColor" 
@@ -166,23 +175,24 @@ export default function Landing() {
                 repeat: Infinity,
               }}
             />
-            {/* Shopping bag */}
-            <motion.rect 
-              x="58" 
-              y="48" 
-              width="12" 
-              height="15" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2"
+            {/* Shopping bag with handles */}
+            <motion.g
               animate={{
-                y: [48, 50, 48],
+                y: [0, 2, 0],
               }}
               transition={{
                 duration: 2,
                 repeat: Infinity,
               }}
-            />
+            >
+              <rect x="58" y="48" width="12" height="15" fill="none" stroke="currentColor" strokeWidth="2" />
+              <path d="M61 48 Q63 45 65 48" stroke="currentColor" strokeWidth="1.5" fill="none" />
+              <path d="M65 48 Q67 45 69 48" stroke="currentColor" strokeWidth="1.5" fill="none" />
+            </motion.g>
+            {/* Store items/products */}
+            <rect x="72" y="60" width="6" height="8" fill="currentColor" opacity="0.4" />
+            <rect x="72" y="70" width="6" height="8" fill="currentColor" opacity="0.4" />
+            <circle cx="75" cy="55" r="3" fill="currentColor" opacity="0.4" />
           </motion.g>
         </svg>
       )
@@ -195,7 +205,9 @@ export default function Landing() {
           <motion.g>
             {/* Person at computer */}
             <circle cx="50" cy="30" r="10" fill="currentColor" opacity="0.8" />
+            {/* Body */}
             <path d="M50 40 L50 55" stroke="currentColor" strokeWidth="3" opacity="0.8" />
+            {/* Animated typing arms */}
             <motion.path 
               d="M50 45 L35 50" 
               stroke="currentColor" 
@@ -223,8 +235,10 @@ export default function Landing() {
                 delay: 0.3,
               }}
             />
-            {/* Computer */}
+            {/* Computer monitor */}
             <rect x="30" y="55" width="40" height="25" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.8" />
+            <rect x="32" y="57" width="36" height="21" fill="currentColor" opacity="0.1" />
+            {/* Animated code lines */}
             <motion.line 
               x1="35" 
               y1="60" 
@@ -240,6 +254,11 @@ export default function Landing() {
                 repeat: Infinity,
               }}
             />
+            <line x1="35" y1="65" x2="55" y2="65" stroke="currentColor" strokeWidth="1.5" opacity="0.6" />
+            <line x1="35" y1="70" x2="60" y2="70" stroke="currentColor" strokeWidth="1.5" opacity="0.6" />
+            {/* Computer stand */}
+            <rect x="47" y="80" width="6" height="8" fill="currentColor" opacity="0.6" />
+            <rect x="40" y="88" width="20" height="2" fill="currentColor" opacity="0.6" />
           </motion.g>
         </svg>
       )
@@ -258,11 +277,16 @@ export default function Landing() {
               repeat: Infinity,
             }}
           >
-            {/* Doctor */}
+            {/* Doctor with hat */}
             <circle cx="50" cy="32" r="11" fill="currentColor" opacity="0.8" />
+            {/* Doctor's cap */}
+            <ellipse cx="50" cy="22" rx="13" ry="3" fill="currentColor" opacity="0.7" />
+            <rect x="45" y="22" width="10" height="3" fill="currentColor" opacity="0.7" />
+            {/* Body with coat */}
             <path d="M50 43 L50 62 L45 78" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
             <path d="M50 62 L55 78" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
             <path d="M50 48 L35 52" stroke="currentColor" strokeWidth="3" opacity="0.8" />
+            {/* Animated arm with stethoscope */}
             <motion.path 
               d="M50 48 L65 52" 
               stroke="currentColor" 
@@ -276,7 +300,7 @@ export default function Landing() {
                 repeat: Infinity,
               }}
             />
-            {/* Medical cross */}
+            {/* Medical cross symbol */}
             <motion.g
               animate={{
                 scale: [1, 1.1, 1],
@@ -286,9 +310,12 @@ export default function Landing() {
                 repeat: Infinity,
               }}
             >
-              <line x1="68" y1="45" x2="68" y2="55" stroke="currentColor" strokeWidth="3" />
-              <line x1="63" y1="50" x2="73" y2="50" stroke="currentColor" strokeWidth="3" />
+              <rect x="66" y="45" width="4" height="10" rx="1" fill="currentColor" />
+              <rect x="63" y="48" width="10" height="4" rx="1" fill="currentColor" />
             </motion.g>
+            {/* Medical bag */}
+            <rect x="25" y="55" width="12" height="10" rx="1" fill="currentColor" opacity="0.5" />
+            <path d="M28 55 L28 53 L33 53 L33 55" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.5" />
           </motion.g>
         </svg>
       )
@@ -299,10 +326,15 @@ export default function Landing() {
       illustration: (
         <svg viewBox="0 0 100 100" className="w-full h-full">
           <motion.g>
-            {/* Teacher/Student */}
+            {/* Teacher/Student with graduation cap */}
             <circle cx="45" cy="35" r="10" fill="currentColor" opacity="0.8" />
+            {/* Graduation cap */}
+            <polygon points="45,25 35,28 45,31 55,28" fill="currentColor" opacity="0.7" />
+            <rect x="43" y="25" width="4" height="6" fill="currentColor" opacity="0.7" />
+            {/* Body */}
             <path d="M45 45 L45 60 L40 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
             <path d="M45 60 L50 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            {/* Animated arm holding book */}
             <motion.path 
               d="M45 50 L60 45" 
               stroke="currentColor" 
@@ -316,15 +348,8 @@ export default function Landing() {
                 repeat: Infinity,
               }}
             />
-            {/* Book */}
-            <motion.rect 
-              x="58" 
-              y="42" 
-              width="15" 
-              height="12" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2"
+            {/* Open book */}
+            <motion.g
               animate={{
                 rotateZ: [0, -5, 0],
               }}
@@ -332,22 +357,34 @@ export default function Landing() {
                 duration: 2,
                 repeat: Infinity,
               }}
-            />
-            <motion.line 
-              x1="65" 
-              y1="42" 
-              x2="65" 
-              y2="54" 
-              stroke="currentColor" 
-              strokeWidth="2"
-              animate={{
-                opacity: [0.8, 1, 0.8],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-              }}
-            />
+              style={{ originX: "65px", originY: "48px" }}
+            >
+              <rect x="58" y="42" width="15" height="12" fill="none" stroke="currentColor" strokeWidth="2" />
+              <line x1="65" y1="42" x2="65" y2="54" stroke="currentColor" strokeWidth="2" />
+              {/* Book pages */}
+              <motion.line 
+                x1="60" 
+                y1="46" 
+                x2="63" 
+                y2="46" 
+                stroke="currentColor" 
+                strokeWidth="1"
+                animate={{
+                  opacity: [0.8, 1, 0.8],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+              />
+              <line x1="67" y1="46" x2="71" y2="46" stroke="currentColor" strokeWidth="1" opacity="0.6" />
+              <line x1="60" y1="49" x2="63" y2="49" stroke="currentColor" strokeWidth="1" opacity="0.6" />
+              <line x1="67" y1="49" x2="71" y2="49" stroke="currentColor" strokeWidth="1" opacity="0.6" />
+            </motion.g>
+            {/* Blackboard/whiteboard */}
+            <rect x="20" y="55" width="18" height="12" fill="currentColor" opacity="0.3" />
+            <line x1="23" y1="58" x2="32" y2="58" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
+            <line x1="23" y1="62" x2="35" y2="62" stroke="currentColor" strokeWidth="1.5" opacity="0.5" />
           </motion.g>
         </svg>
       )
@@ -366,10 +403,15 @@ export default function Landing() {
               repeat: Infinity,
             }}
           >
-            {/* Service person */}
+            {/* Service person with hard hat */}
             <circle cx="48" cy="33" r="10" fill="currentColor" opacity="0.8" />
+            {/* Hard hat */}
+            <ellipse cx="48" cy="24" rx="12" ry="3" fill="currentColor" opacity="0.7" />
+            <path d="M36 24 L36 27 L60 27 L60 24" fill="currentColor" opacity="0.6" />
+            {/* Body */}
             <path d="M48 43 L48 60 L43 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
             <path d="M48 60 L53 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            {/* Animated arm with tool */}
             <motion.path 
               d="M48 48 L62 52" 
               stroke="currentColor" 
@@ -383,7 +425,7 @@ export default function Landing() {
                 repeat: Infinity,
               }}
             />
-            {/* Tool/Wrench */}
+            {/* Wrench tool */}
             <motion.g
               animate={{
                 rotate: [0, 15, 0],
@@ -392,10 +434,29 @@ export default function Landing() {
                 duration: 1.5,
                 repeat: Infinity,
               }}
-              style={{ originX: "65px", originY: "50px" }}
+              style={{ originX: "66px", originY: "50px" }}
             >
-              <rect x="62" y="48" width="8" height="15" fill="none" stroke="currentColor" strokeWidth="2" />
+              <rect x="62" y="48" width="8" height="15" rx="1" fill="none" stroke="currentColor" strokeWidth="2" />
               <circle cx="66" cy="46" r="3" fill="none" stroke="currentColor" strokeWidth="2" />
+              <circle cx="66" cy="46" r="1.5" fill="currentColor" opacity="0.6" />
+            </motion.g>
+            {/* Toolbox */}
+            <rect x="25" y="62" width="14" height="10" rx="1" fill="currentColor" opacity="0.5" />
+            <rect x="29" y="60" width="6" height="2" fill="currentColor" opacity="0.5" />
+            {/* Gear icon */}
+            <motion.g
+              animate={{
+                rotate: [0, 360],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              style={{ originX: "72px", originY: "68px" }}
+            >
+              <circle cx="72" cy="68" r="4" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.4" />
+              <circle cx="72" cy="68" r="2" fill="currentColor" opacity="0.4" />
             </motion.g>
           </motion.g>
         </svg>
