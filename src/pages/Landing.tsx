@@ -81,12 +81,326 @@ export default function Landing() {
   };
 
   const categories = [
-    { name: "Restaurants & Cafes", count: "50+", icon: "🍽️" },
-    { name: "Retail & Shops", count: "40+", icon: "🛍️" },
-    { name: "Technology", count: "30+", icon: "💻" },
-    { name: "Healthcare", count: "25+", icon: "🏥" },
-    { name: "Education", count: "20+", icon: "📚" },
-    { name: "Services", count: "60+", icon: "⚙️" },
+    { 
+      name: "Restaurants & Cafes", 
+      count: "50+", 
+      illustration: (
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <motion.g
+            animate={{
+              y: [0, -3, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            {/* Person eating */}
+            <circle cx="50" cy="35" r="12" fill="currentColor" opacity="0.8" />
+            <path d="M50 47 L45 65 L40 80" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            <path d="M50 47 L55 65 L60 80" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            <path d="M50 50 L35 55" stroke="currentColor" strokeWidth="3" opacity="0.8" />
+            <motion.path 
+              d="M50 50 L65 55" 
+              stroke="currentColor" 
+              strokeWidth="3" 
+              opacity="0.8"
+              animate={{
+                d: ["M50 50 L65 55", "M50 50 L60 45", "M50 50 L65 55"],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            {/* Food */}
+            <motion.circle 
+              cx="65" 
+              cy="45" 
+              r="4" 
+              fill="currentColor"
+              animate={{
+                opacity: [1, 0.5, 1],
+                scale: [1, 0.8, 1],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+              }}
+            />
+          </motion.g>
+        </svg>
+      )
+    },
+    { 
+      name: "Retail & Shops", 
+      count: "40+", 
+      illustration: (
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <motion.g
+            animate={{
+              x: [0, 2, 0],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            {/* Person shopping */}
+            <circle cx="45" cy="30" r="10" fill="currentColor" opacity="0.8" />
+            <path d="M45 40 L45 60 L40 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            <path d="M45 60 L50 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            <motion.path 
+              d="M45 45 L60 50" 
+              stroke="currentColor" 
+              strokeWidth="3" 
+              opacity="0.8"
+              animate={{
+                d: ["M45 45 L60 50", "M45 45 L65 48", "M45 45 L60 50"],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+              }}
+            />
+            {/* Shopping bag */}
+            <motion.rect 
+              x="58" 
+              y="48" 
+              width="12" 
+              height="15" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2"
+              animate={{
+                y: [48, 50, 48],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+              }}
+            />
+          </motion.g>
+        </svg>
+      )
+    },
+    { 
+      name: "Technology", 
+      count: "30+", 
+      illustration: (
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <motion.g>
+            {/* Person at computer */}
+            <circle cx="50" cy="30" r="10" fill="currentColor" opacity="0.8" />
+            <path d="M50 40 L50 55" stroke="currentColor" strokeWidth="3" opacity="0.8" />
+            <motion.path 
+              d="M50 45 L35 50" 
+              stroke="currentColor" 
+              strokeWidth="3" 
+              opacity="0.8"
+              animate={{
+                d: ["M50 45 L35 50", "M50 45 L35 55", "M50 45 L35 50"],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+              }}
+            />
+            <motion.path 
+              d="M50 45 L65 50" 
+              stroke="currentColor" 
+              strokeWidth="3" 
+              opacity="0.8"
+              animate={{
+                d: ["M50 45 L65 50", "M50 45 L65 48", "M50 45 L65 50"],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: 0.3,
+              }}
+            />
+            {/* Computer */}
+            <rect x="30" y="55" width="40" height="25" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.8" />
+            <motion.line 
+              x1="35" 
+              y1="60" 
+              x2="50" 
+              y2="60" 
+              stroke="currentColor" 
+              strokeWidth="2"
+              animate={{
+                x2: [50, 65, 50],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+              }}
+            />
+          </motion.g>
+        </svg>
+      )
+    },
+    { 
+      name: "Healthcare", 
+      count: "25+", 
+      illustration: (
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <motion.g
+            animate={{
+              y: [0, -2, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+            }}
+          >
+            {/* Doctor */}
+            <circle cx="50" cy="32" r="11" fill="currentColor" opacity="0.8" />
+            <path d="M50 43 L50 62 L45 78" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            <path d="M50 62 L55 78" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            <path d="M50 48 L35 52" stroke="currentColor" strokeWidth="3" opacity="0.8" />
+            <motion.path 
+              d="M50 48 L65 52" 
+              stroke="currentColor" 
+              strokeWidth="3" 
+              opacity="0.8"
+              animate={{
+                d: ["M50 48 L65 52", "M50 48 L68 50", "M50 48 L65 52"],
+              }}
+              transition={{
+                duration: 1.8,
+                repeat: Infinity,
+              }}
+            />
+            {/* Medical cross */}
+            <motion.g
+              animate={{
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 1.8,
+                repeat: Infinity,
+              }}
+            >
+              <line x1="68" y1="45" x2="68" y2="55" stroke="currentColor" strokeWidth="3" />
+              <line x1="63" y1="50" x2="73" y2="50" stroke="currentColor" strokeWidth="3" />
+            </motion.g>
+          </motion.g>
+        </svg>
+      )
+    },
+    { 
+      name: "Education", 
+      count: "20+", 
+      illustration: (
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <motion.g>
+            {/* Teacher/Student */}
+            <circle cx="45" cy="35" r="10" fill="currentColor" opacity="0.8" />
+            <path d="M45 45 L45 60 L40 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            <path d="M45 60 L50 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            <motion.path 
+              d="M45 50 L60 45" 
+              stroke="currentColor" 
+              strokeWidth="3" 
+              opacity="0.8"
+              animate={{
+                d: ["M45 50 L60 45", "M45 50 L65 48", "M45 50 L60 45"],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+              }}
+            />
+            {/* Book */}
+            <motion.rect 
+              x="58" 
+              y="42" 
+              width="15" 
+              height="12" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2"
+              animate={{
+                rotateZ: [0, -5, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+              }}
+            />
+            <motion.line 
+              x1="65" 
+              y1="42" 
+              x2="65" 
+              y2="54" 
+              stroke="currentColor" 
+              strokeWidth="2"
+              animate={{
+                opacity: [0.8, 1, 0.8],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+              }}
+            />
+          </motion.g>
+        </svg>
+      )
+    },
+    { 
+      name: "Services", 
+      count: "60+", 
+      illustration: (
+        <svg viewBox="0 0 100 100" className="w-full h-full">
+          <motion.g
+            animate={{
+              x: [0, 3, 0],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+            }}
+          >
+            {/* Service person */}
+            <circle cx="48" cy="33" r="10" fill="currentColor" opacity="0.8" />
+            <path d="M48 43 L48 60 L43 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            <path d="M48 60 L53 75" stroke="currentColor" strokeWidth="3" fill="none" opacity="0.8" />
+            <motion.path 
+              d="M48 48 L62 52" 
+              stroke="currentColor" 
+              strokeWidth="3" 
+              opacity="0.8"
+              animate={{
+                d: ["M48 48 L62 52", "M48 48 L65 48", "M48 48 L62 52"],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+              }}
+            />
+            {/* Tool/Wrench */}
+            <motion.g
+              animate={{
+                rotate: [0, 15, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+              }}
+              style={{ originX: "65px", originY: "50px" }}
+            >
+              <rect x="62" y="48" width="8" height="15" fill="none" stroke="currentColor" strokeWidth="2" />
+              <circle cx="66" cy="46" r="3" fill="none" stroke="currentColor" strokeWidth="2" />
+            </motion.g>
+          </motion.g>
+        </svg>
+      )
+    },
   ];
 
   const stats = [
@@ -267,23 +581,9 @@ export default function Landing() {
                 <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/50 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm relative overflow-hidden group">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <CardContent className="pt-6 pb-6 text-center relative z-10">
-                    <motion.div
-                      className="text-4xl mb-3"
-                      animate={{
-                        rotateY: [0, 360],
-                        rotateZ: [0, 10, -10, 0],
-                        scale: [1, 1.1, 1],
-                      }}
-                      transition={{
-                        duration: 10,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.3,
-                      }}
-                      style={{ transformStyle: "preserve-3d" }}
-                    >
-                      {category.icon}
-                    </motion.div>
+                    <div className="h-16 w-16 mx-auto mb-3 text-primary">
+                      {category.illustration}
+                    </div>
                     <h3 className="font-bold text-sm mb-1">{category.name}</h3>
                     <p className="text-xs text-muted-foreground">
                       {category.count} listings
