@@ -47,6 +47,39 @@ export default function Landing() {
     },
   ];
 
+  const iconVariants = {
+    initial: {
+      rotateX: 0,
+      rotateY: 0,
+      rotateZ: 0,
+      scale: 1,
+      z: 0,
+    },
+    animate: {
+      rotateX: [0, 15, -15, 0],
+      rotateY: [0, 25, -25, 0],
+      rotateZ: [0, 5, -5, 0],
+      scale: [1, 1.1, 1],
+      z: [0, 50, 0],
+      transition: {
+        duration: 8,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+    hover: {
+      rotateX: 25,
+      rotateY: 25,
+      rotateZ: 10,
+      scale: 1.3,
+      z: 100,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+      },
+    },
+  };
+
   const categories = [
     { name: "Restaurants & Cafes", count: "50+", icon: "🍽️" },
     { name: "Retail & Shops", count: "40+", icon: "🛍️" },
@@ -111,15 +144,13 @@ export default function Landing() {
               >
                 Browse
               </Button>
-              {!isLoading && isAuthenticated && (
-                <Button
-                  onClick={() => navigate("/list-business")}
-                  size="lg"
-                  className="text-base shadow-lg shadow-primary/20"
-                >
-                  List Your Business
-                </Button>
-              )}
+              <Button
+                onClick={() => navigate("/list-business")}
+                size="lg"
+                className="text-base shadow-lg shadow-primary/20"
+              >
+                List Your Business
+              </Button>
             </div>
           </div>
         </div>
@@ -228,14 +259,31 @@ export default function Landing() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ scale: 1.05, y: -6 }}
+                whileHover={{ scale: 1.05, y: -6, rotateY: 5, rotateX: 5 }}
                 className="cursor-pointer"
                 onClick={() => navigate("/browse")}
+                style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
               >
                 <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/50 bg-gradient-to-br from-card to-card/50 backdrop-blur-sm relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration:300" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <CardContent className="pt-6 pb-6 text-center relative z-10">
-                    <div className="text-4xl mb-3">{category.icon}</div>
+                    <motion.div
+                      className="text-4xl mb-3"
+                      animate={{
+                        rotateY: [0, 360],
+                        rotateZ: [0, 10, -10, 0],
+                        scale: [1, 1.1, 1],
+                      }}
+                      transition={{
+                        duration: 10,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.3,
+                      }}
+                      style={{ transformStyle: "preserve-3d" }}
+                    >
+                      {category.icon}
+                    </motion.div>
                     <h3 className="font-bold text-sm mb-1">{category.name}</h3>
                     <p className="text-xs text-muted-foreground">
                       {category.count} listings
@@ -266,7 +314,10 @@ export default function Landing() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto"
+            style={{ perspective: "1000px" }}
+          >
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -275,12 +326,98 @@ export default function Landing() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
+                style={{ transformStyle: "preserve-3d" }}
               >
                 <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/50 bg-gradient-to-br from-card via-card to-primary/5 backdrop-blur-sm relative overflow-hidden group">
                   <CardContent className="pt-10 pb-10 relative z-10">
-                    <div className="h-20 w-20 mx-auto mb-8 flex items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 shadow-lg">
-                      <feature.icon className="h-10 w-10 text-primary" />
-                    </div>
+                    <motion.div
+                      className="h-24 w-24 mx-auto mb-8 flex items-center justify-center relative"
+                      style={{
+                        transformStyle: "preserve-3d",
+                        perspective: "1000px",
+                      }}
+                    >
+                      <motion.div
+                        className="absolute inset-0 rounded-2xl bg-primary/20 blur-xl"
+                        animate={{
+                          scale: [1, 1.3, 1],
+                          opacity: [0.3, 0.6, 0.3],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.2,
+                        }}
+                      />
+                      <motion.div
+                        className="absolute inset-0 rounded-2xl bg-accent/20 blur-lg"
+                        animate={{
+                          scale: [1.2, 1, 1.2],
+                          opacity: [0.2, 0.5, 0.2],
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.3,
+                        }}
+                      />
+
+                      <motion.div
+                        className="relative z-10 h-20 w-20 flex items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20 border-2 border-primary/30 shadow-2xl"
+                        variants={iconVariants}
+                        initial="initial"
+                        animate="animate"
+                        whileHover="hover"
+                        style={{ transformStyle: "preserve-3d" }}
+                      >
+                        <motion.div
+                          className="absolute inset-0 rounded-2xl bg-primary/10"
+                          style={{ transform: "translateZ(-20px)" }}
+                        />
+                        <motion.div
+                          animate={{
+                            filter: [
+                              "drop-shadow(0 0 8px rgba(var(--primary), 0.5))",
+                              "drop-shadow(0 0 20px rgba(var(--primary), 0.8))",
+                              "drop-shadow(0 0 8px rgba(var(--primary), 0.5))",
+                            ],
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: index * 0.25,
+                          }}
+                        >
+                          <feature.icon
+                            className="h-10 w-10 text-primary relative z-20"
+                            style={{ transform: "translateZ(30px)" }}
+                          />
+                        </motion.div>
+
+                        {[...Array(4)].map((_, i) => (
+                          <motion.div
+                            key={i}
+                            className="absolute w-1.5 h-1.5 bg-primary/60 rounded-full"
+                            animate={{
+                              x: [0, Math.cos((i * Math.PI) / 2) * 30, 0],
+                              y: [0, Math.sin((i * Math.PI) / 2) * 30, 0],
+                              opacity: [0, 1, 0],
+                              scale: [0, 1.5, 0],
+                            }}
+                            transition={{
+                              duration: 4,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: i * 0.5 + index * 0.2,
+                            }}
+                          />
+                        ))}
+                      </motion.div>
+                    </motion.div>
+
                     <h3 className="text-xl font-bold mb-4 text-center">
                       {feature.title}
                     </h3>
@@ -370,7 +507,6 @@ export default function Landing() {
       <section className="py-24 bg-gradient-to-br from-primary via-primary to-primary/80 text-primary-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:14px_24px]" />
 
-        {/* Twinkling Stars */}
         {[...Array(50)].map((_, i) => (
           <motion.div
             key={`star-${i}`}
@@ -392,10 +528,9 @@ export default function Landing() {
           />
         ))}
 
-        {/* Falling Stars */}
         {[...Array(18)].map((_, i) => (
           <motion.div
-            key={i}
+            key={`fall-${i}`}
             className="absolute w-1 h-1 bg-white rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
@@ -462,7 +597,6 @@ export default function Landing() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
               <span className="font-bold text-xl">Business Exchange</span>
             </div>
             <p className="text-sm text-muted-foreground">
