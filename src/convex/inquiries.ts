@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { getCurrentUser } from "./users";
+/* auth disabled: removed getCurrentUser import */
 
 export const create = mutation({
   args: {
@@ -23,17 +23,10 @@ export const create = mutation({
 export const getForBusiness = query({
   args: { businessId: v.id("businesses") },
   handler: async (ctx, args) => {
-    const user = await getCurrentUser(ctx);
-    if (!user) return [];
-
-    const business = await ctx.db.get(args.businessId);
-    if (!business || business.ownerId !== user._id) {
-      return [];
-    }
-
+    // Auth is disabled; return all inquiries for this business using the index
     return await ctx.db
       .query("inquiries")
-      .filter((q) => q.eq(q.field("businessId"), args.businessId))
+      .withIndex("by_business", (q) => q.eq("businessId", args.businessId))
       .collect();
   },
 });

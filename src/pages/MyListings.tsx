@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { api } from "@/convex/_generated/api";
 import { motion } from "framer-motion";
-import { Building2, Eye, Loader2, MapPin, TrendingUp } from "lucide-react";
+import { ArrowLeft, Building2, Eye, Loader2, MapPin, TrendingUp } from "lucide-react";
 import { useQuery } from "convex/react";
 import { useNavigate } from "react-router";
 
@@ -24,8 +24,18 @@ export default function MyListings() {
       <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-              <span className="font-bold text-xl">Business Exchange</span>
+            <div className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/")}
+                className="hover:bg-muted"
+              >
+                <ArrowLeft className="h-5 w-5" />
+              </Button>
+              <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
+                <span className="font-bold text-xl">Business Exchange</span>
+              </div>
             </div>
             <div className="flex items-center gap-4">
               <Button variant="outline" onClick={() => navigate("/browse")}>

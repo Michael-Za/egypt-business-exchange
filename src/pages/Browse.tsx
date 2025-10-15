@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/convex/_generated/api";
 import { motion } from "framer-motion";
 import { ArrowLeft, Building2, Eye, Loader2, MapPin, Search, TrendingUp } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "convex/react";
 import { useNavigate } from "react-router";
 
@@ -22,6 +23,22 @@ export default function Browse() {
     minPrice,
     maxPrice,
   });
+
+  // Error handling for long-loading state
+  const [loadError, setLoadError] = useState(false);
+  useEffect(() => {
+    if (businesses === undefined) {
+      const t = setTimeout(() => setLoadError(true), 8000);
+      return () => clearTimeout(t);
+    } else {
+      setLoadError(false);
+    }
+  }, [businesses]);
+
+  const handleRetry = () => {
+    setLoadError(false);
+    window.location.reload();
+  };
 
   const categories = [
     { value: "all", label: "All Categories" },
@@ -109,9 +126,25 @@ export default function Browse() {
 
         {/* Results */}
         {businesses === undefined ? (
-          <div className="flex justify-center py-12">
-            <Loader2 className="h-8 w-8 animate-spin" />
-          </div>
+          loadError ? (
+            <div className="py-8">
+              <Alert variant="destructive" className="max-w-xl mx-auto">
+                <AlertTitle>Failed to load businesses</AlertTitle>
+                <AlertDescription>
+                  Please check your connection and try again.
+                </AlertDescription>
+                <div className="mt-4 flex justify-center">
+                  <Button variant="outline" onClick={handleRetry}>
+                    Retry
+                  </Button>
+                </div>
+              </Alert>
+            </div>
+          ) : (
+            <div className="flex justify-center py-12">
+              <Loader2 className="h-8 w-8 animate-spin" />
+            </div>
+          )
         ) : businesses.length === 0 ? (
           <div className="text-center py-12">
             <Building2 className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
